@@ -1,150 +1,14 @@
-/* App Styles */
-.app {
-  min-height: 100vh;
-}
+/* home.css - Updated to avoid navbar conflicts */
 
-/* Navbar Styles */
-.navbar {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  z-index: 1000;
-  padding: 1rem 2rem;
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #3E8E41;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.nav-desktop {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-}
-
-.nav-links a {
-  color: #1F2937;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.nav-links a:hover {
-  color: #3E8E41;
-}
-
-.lang-toggle {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.lang-btn {
-  background: none;
-  border: 1px solid #3E8E41;
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.9rem;
-  color: #3E8E41;
-}
-
-.lang-btn.active {
-  background: #3E8E41;
-  color: white;
-}
-
-.lang-btn:hover {
-  background: #3E8E41;
-  color: white;
-}
-
-.mic-button-nav {
-  background: #3E8E41;
-  border: none;
-  padding: 0.6rem;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  transition: transform 0.3s;
-}
-
-.mic-button-nav:hover {
-  transform: scale(1.1);
-  background: #4CAF50;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  color: #3E8E41;
-}
-
-.nav-mobile {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.nav-links-mobile {
-  list-style: none;
-  margin: 0 0 1rem 0;
-}
-
-.nav-links-mobile li {
-  margin-bottom: 0.5rem;
-}
-
-.nav-links-mobile a {
-  color: #1F2937;
-  font-weight: 500;
-  display: block;
-  padding: 0.5rem 0;
-}
-
-.lang-toggle-mobile {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
+/* Home Page Container */
+.home-page {
+  min-height: calc(100vh - 70px);
 }
 
 /* Hero Styles */
 .hero {
   position: relative;
-  min-height: 600px;
+  min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,6 +33,7 @@
   padding: 4rem 2rem;
   text-align: center;
   color: white;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -176,12 +41,14 @@
   font-size: 2.5rem;
   margin-bottom: 1rem;
   line-height: 1.2;
+  font-weight: 700;
 }
 
 .hero p {
   font-size: 1.25rem;
   margin-bottom: 2rem;
   opacity: 0.95;
+  line-height: 1.6;
 }
 
 .cta-buttons {
@@ -192,13 +59,14 @@
   margin-bottom: 1rem;
 }
 
-.btn-primary, .btn-secondary {
+.hero .btn-primary, 
+.hero .btn-secondary {
   padding: 1rem 2rem;
   font-size: 1.1rem;
   border: none;
   border-radius: 24px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -207,23 +75,23 @@
   font-weight: 600;
 }
 
-.btn-primary {
+.hero .btn-primary {
   background: white;
   color: #3E8E41;
 }
 
-.btn-primary:hover {
+.hero .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
-.btn-secondary {
+.hero .btn-secondary {
   background: transparent;
   color: white;
   border: 2px solid white;
 }
 
-.btn-secondary:hover {
+.hero .btn-secondary:hover {
   background: rgba(255,255,255,0.1);
 }
 
@@ -245,6 +113,11 @@
   cursor: pointer;
   animation: pulse 2s infinite;
   color: #3E8E41;
+  transition: transform 0.3s ease;
+}
+
+.mic-pulse:hover {
+  transform: scale(1.1);
 }
 
 @keyframes pulse {
@@ -293,6 +166,7 @@
   cursor: pointer;
   padding: 0.5rem;
   color: #666;
+  transition: color 0.3s ease;
 }
 
 .modal-close:hover {
@@ -304,6 +178,8 @@
   color: #3E8E41;
   text-align: center;
   font-family: 'Poppins', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
 }
 
 .voice-widget {
@@ -330,7 +206,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   flex-shrink: 0;
 }
 
@@ -340,8 +216,17 @@
 }
 
 .voice-mic.listening {
-  animation: pulse 1s infinite;
+  animation: micPulse 1s infinite;
   background: #ff4444;
+}
+
+@keyframes micPulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.1); 
+  }
 }
 
 .voice-input {
@@ -351,6 +236,7 @@
   border-radius: 24px;
   font-size: 1rem;
   outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .voice-input:focus {
@@ -363,6 +249,12 @@
   border-radius: 12px;
   margin-bottom: 1rem;
   min-height: 60px;
+}
+
+.transcript-box p {
+  margin: 0;
+  color: #1b5e20;
+  line-height: 1.6;
 }
 
 .listening-text {
@@ -378,6 +270,12 @@
   border-left: 4px solid #3E8E41;
 }
 
+.response-box p {
+  margin: 0;
+  color: #333;
+  line-height: 1.7;
+}
+
 .audio-control {
   display: flex;
   align-items: center;
@@ -385,10 +283,16 @@
   margin-bottom: 1rem;
   color: #3E8E41;
   cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
 .audio-control:hover {
   opacity: 0.7;
+}
+
+.audio-control span {
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .action-buttons {
@@ -404,7 +308,7 @@
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease;
 }
 
 .btn-save {
@@ -423,16 +327,8 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .nav-desktop {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-mobile {
-    display: block;
+  .hero {
+    min-height: calc(100vh - 60px);
   }
 
   .hero h1 {
@@ -443,7 +339,8 @@
     font-size: 1rem;
   }
 
-  .btn-primary, .btn-secondary {
+  .hero .btn-primary, 
+  .hero .btn-secondary {
     min-width: 160px;
     padding: 0.875rem 1.5rem;
     font-size: 1rem;
@@ -454,9 +351,18 @@
     align-items: center;
   }
 
+  .mic-pulse {
+    width: 70px;
+    height: 70px;
+  }
+
   .modal-content {
     margin: 1rem;
     padding: 1.5rem;
+  }
+
+  .modal-content h2 {
+    font-size: 1.5rem;
   }
 
   .voice-controls {
@@ -469,8 +375,21 @@
   }
 }
 
-@media (min-width: 769px) {
-  .nav-mobile {
-    display: none !important;
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .mic-pulse {
+    width: 60px;
+    height: 60px;
   }
 }

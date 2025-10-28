@@ -7,12 +7,27 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import About from "./components/About/About"
 import Navbar from "./components/Navbar/Navbar"
-
+import Chatbox from "./components/Chatbot/Chatbox"
+import Services from "./components/Services/Services"
+import Contact from "./components/Contact/contact"
 const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
-      <Home/>
+        <Navbar />
+        <Chatbox/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />}/>
+          {/* } />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/learn" element={<LearnPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/join" element={<JoinPage />} /> */}
+          <Route path="/contact" element={<Contact/>}/>
+        </Routes>
+
       </div>
     </BrowserRouter>
   );
