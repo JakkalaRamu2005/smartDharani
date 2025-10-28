@@ -1,0 +1,148 @@
+/* SmartDharaniBot.css */
+:root {
+  --bot-color: #4CAF50;
+  --bot-hover-color: #45A049;
+  --user-msg-bg: #DCF8C6;
+  --bot-msg-bg: #EAEAEA;
+  --chat-bg: #fff;
+  --chat-body-bg: #f8f8f8;
+  --font-family: Arial, sans-serif;
+}
+
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: var(--font-family);
+}
+
+.chatbot-button {
+  background-color: var(--bot-color);
+  color: white;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.chatbot-button:hover {
+  transform: scale(1.1);
+}
+
+.chat-window {
+  width: 300px;
+  height: 380px;
+  background: var(--chat-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.chat-header {
+  background-color: var(--bot-color);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.chat-close-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: var(--chat-body-bg);
+}
+
+.message {
+  margin: 5px 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: var(--user-msg-bg);
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.message.bot {
+  background-color: var(--bot-msg-bg);
+  align-self: flex-start;
+  margin-right: auto;
+}
+
+.chat-input-area {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.chat-input-area input:disabled {
+  background: #eee;
+}
+
+.chat-input-area button {
+  background-color: var(--bot-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-input-area button:hover:not(:disabled) {
+  background-color: var(--bot-hover-color);
+}
+
+.chat-input-area button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .chat-window {
+    width: 90vw;
+    height: 70vh;
+    right: 5%;
+    bottom: 80px; /* so button still visible */
+  }
+
+  .chatbot-button {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
+}

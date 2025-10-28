@@ -1,0 +1,84 @@
+/* Center the login box in the screen */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main container */
+.auth-container {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  text-align: center;
+}
+
+/* Heading */
+.auth-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form layout */
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inputs */
+.auth-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.auth-container input:focus {
+  border: 1px solid #4a90e2;
+}
+
+/* Button */
+.auth-container button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container button:hover {
+  background-color: #357abd;
+}
+
+/* Text below form */
+.auth-container p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.auth-container span {
+  color: #4a90e2;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.auth-container span:hover {
+  text-decoration: underline;
+}

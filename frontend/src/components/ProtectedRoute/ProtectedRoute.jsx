@@ -1,0 +1,17 @@
+import React from "react";
+import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
+
+function ProtectedRoute({ children }) {
+  const token = Cookies.get("token"); // read token from cookie
+
+  if (!token) {
+    // if cookie not found, send user to login
+    return <Navigate to="/login" replace />;
+  }
+
+  // if cookie found, allow access
+  return children;
+}
+
+export default ProtectedRoute;
