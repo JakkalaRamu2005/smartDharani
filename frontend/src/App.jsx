@@ -14,22 +14,55 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar />
-        <Chatbox/>
+           <Navbar />
+        {/* <Chatbox /> */}
+      
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />}/>
-          {/* } />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/learn" element={<LearnPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/join" element={<JoinPage />} /> */}
-          <Route path="/contact" element={<Contact/>}/>
-        </Routes>
+       
+        {/* 🌐 Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      </div>
-    </BrowserRouter>
+        {/* 🔒 Protected Routes */}
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/services"
+          element={
+            <ProtectedRoute>
+              <Services />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/contact"
+          element={
+            <ProtectedRoute>
+              <Contact />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+
+    </div>
+    </BrowserRouter >
   );
 }
 

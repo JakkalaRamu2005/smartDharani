@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./login.css"
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
+  const {login} = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -12,11 +14,16 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
+      const response = await axios.post(
         "http://localhost:5000/api/auth/login",
         { email, password },
         { withCredentials: true } 
       );
+
+
+
+      const token = response.data.token;
+      login(token);
       alert("Login successful!");
       setTimeout(()=>{
         navigate("/");
