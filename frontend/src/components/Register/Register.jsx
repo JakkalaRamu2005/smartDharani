@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./register.css";
-
+// import { AuthContext } from "../context/AuthContext";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  // const {isAuthenticated} = useContext(AuthContext);
+
+
+  // useEffect(()=>{
+  //   if(isAuthenticated){
+  //     navigate("/", {replace: true});
+  //   }
+  // },[isAuthenticated, navigate])
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -25,7 +33,7 @@ function Register() {
         { withCredentials: true }
       );
       alert("Registration successful!");
-      navigate("/login"); // Go to login after success
+      navigate("/login", {replace: true}); // Go to login after success
     } catch (err) {
       alert(err.response?.data?.message || "Registration failed");
     }

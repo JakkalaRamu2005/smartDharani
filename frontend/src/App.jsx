@@ -7,62 +7,69 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import About from "./components/About/About"
 import Navbar from "./components/Navbar/Navbar"
-import Chatbox from "./components/Chatbot/Chatbox"
 import Services from "./components/Services/Services"
 import Contact from "./components/Contact/contact"
+
 const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
-           <Navbar />
-        {/* <Chatbox /> */}
-      
         <Routes>
-       
-        {/* 🌐 Public Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+          {/* 🌐 Public Routes - No Navbar */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-        {/* 🔒 Protected Routes */}
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+          {/* 🔒 Protected Routes - With Navbar */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <Home />
+                </>
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/about"
-          element={
-            <ProtectedRoute>
-              <About />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <About />
+                </>
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/services"
-          element={
-            <ProtectedRoute>
-              <Services />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/services"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <Services />
+                </>
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/contact"
-          element={
-            <ProtectedRoute>
-              <Contact />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-
-    </div>
-    </BrowserRouter >
+          <Route
+            path="/contact"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Navbar />
+                  <Contact />
+                </>
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -6,10 +6,19 @@ import "./login.css"
 import { AuthContext } from "../context/AuthContext";
 
 function Login() {
-  const {login} = useContext(AuthContext);
+  const { login, isAuthenticated } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+
+
+    if (isAuthenticated) {
+      navigate("/", { replace: true });
+    }
+
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +26,7 @@ function Login() {
       const response = await axios.post(
         "http://localhost:5000/api/auth/login",
         { email, password },
-        { withCredentials: true } 
+        { withCredentials: true }
       );
 
 
@@ -25,9 +34,7 @@ function Login() {
       const token = response.data.token;
       login(token);
       alert("Login successful!");
-      setTimeout(()=>{
-        navigate("/");
-      },500)
+      
     } catch (err) {
       alert(err.response?.data?.message || "Invalid login");
     }

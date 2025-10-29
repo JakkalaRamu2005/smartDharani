@@ -27,10 +27,10 @@ export const AuthProvider = ({children})=>{
         setIsAuthenticated(true);
     }
 
-    const logout = (token) =>{
-        Cookies.remove("token");
-        setIsAuthenticated(false);
-    }
+    // const logout = (token) =>{
+    //     Cookies.remove("token");
+    //     setIsAuthenticated(false);
+    // }
 
 
     return(
