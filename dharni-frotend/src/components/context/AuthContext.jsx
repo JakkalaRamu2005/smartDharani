@@ -8,10 +8,13 @@ export const AuthContext = createContext();
 export const AuthProvider = ({children})=>{
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    // Currently token is getting undefined
+    const token =  Cookies.get("token");
+
 
     useEffect(()=>{
 
-        const token = Cookies.get("token");
+        const token =  Cookies.get("token");
 
         if(token){
             setIsAuthenticated(true)
