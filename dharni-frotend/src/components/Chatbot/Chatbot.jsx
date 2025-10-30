@@ -1,6 +1,6 @@
 // SmartDharaniBot.jsx
 import React, { useState, useRef, useEffect } from "react";
-import "./chatbox.css"
+import "./chatbot.css"
 
 // Helper function (in same file for simplicity) for sending message to bot.
 // In production, you should call your backend endpoint which uses the Gemini API key securely.

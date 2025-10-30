@@ -1,4 +1,4 @@
-import "./App.css"
+// import "./App.css"
 import React from 'react'
 import Login from './components/Login/Login'
 import Register from "./components/Register/Register"
@@ -12,7 +12,7 @@ import Contact from "./components/Contact/contact"
 
 const App = () => {
   return (
-    <BrowserRouter>
+  
       <div className="App">
         <Routes>
           {/* 🌐 Public Routes - No Navbar */}
@@ -69,7 +69,7 @@ const App = () => {
           />
         </Routes>
       </div>
-    </BrowserRouter>
+   
   );
 }
 
