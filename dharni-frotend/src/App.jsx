@@ -9,12 +9,15 @@ import About from "./components/About/About"
 import Navbar from "./components/Navbar/Navbar"
 import Services from "./components/Services/Services"
 import Contact from "./components/Contact/contact"
+import Chatbot from './components/Chatbot/Chatbot'
 
 const App = () => {
   return (
   
       <div className="App">
+        <Chatbot />
         <Routes>
+          
           {/* 🌐 Public Routes - No Navbar */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -26,6 +29,7 @@ const App = () => {
               <ProtectedRoute>
                 <>
                   <Navbar />
+                  
                   <Home />
                 </>
               </ProtectedRoute>

@@ -4,6 +4,7 @@ import cors from "cors";
 import "./config/db.js"; 
 import authRoutes from "./routes/authRoutes.js";
 import cookieParser from "cookie-parser";
+import dharaniRoutes from "./routes/dharaniRoutes.js";
 
 dotenv.config();
 
@@ -19,6 +20,9 @@ app.use(cors({
   origin: "http://localhost:5173", // your React frontend URL
   credentials: true, // allow sending cookies
 }));
+
+
+app.use("/api/dharani", dharaniRoutes);
 app.use("/api/auth", authRoutes);
 
 

@@ -1,98 +1,92 @@
-// SmartDharaniBot.jsx
 import React, { useState, useRef, useEffect } from "react";
-import "./chatbot.css"
-
-// Helper function (in same file for simplicity) for sending message to bot.
-// In production, you should call your backend endpoint which uses the Gemini API key securely.
-async function sendToBot(userText) {
-  // placeholder: you’ll replace with real API call via your backend
-  // Example: POST "/api/chatbot" with { message: userText }, backend uses Gemini key.
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      // fake bot response
-      resolve({ text: `Smart Dharani Bot says: (placeholder reply to “${userText}”)` });
-    }, 1000);
-  });
-}
+import axios from "axios";
+import "./chatbot.css";
 
 function SmartDharaniBot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    { sender: "bot", text: "Hello ! I’m Smart Dharani — your assistant for Telangana land records. How can I help you today?" },
+  ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const toggleChat = () => {
-    setIsOpen((open) => !open);
-  };
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const toggleChat = () => setIsOpen(!isOpen);
 
   const handleSend = async () => {
     const text = input.trim();
     if (!text || isLoading) return;
 
-    // Add user message
-    setMessages((prev) => [...prev, { text, sender: "user" }]);
+   
+    const newUserMsg = { sender: "user", text };
+    setMessages((prev) => [...prev, newUserMsg]);
     setInput("");
     setIsLoading(true);
 
     try {
-      const botReply = await sendToBot(text);
-      setMessages((prev) => [...prev, { text: botReply.text, sender: "bot" }]);
-    } catch (error) {
-      setMessages((prev) => [...prev, { text: "Error: could not get reply", sender: "bot" }]);
+      const res = await axios.post("http://localhost:9291/api/dharani/chat", {
+        messages: [...messages, newUserMsg],
+      });
+
+      const botReply = res.data.reply || "Sorry, I didn’t catch that.";
+      setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
+    } catch (err) {
+      console.error("Error fetching bot reply:", err);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: " Sorry, Smart Dharani is currently unavailable." },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Scroll to bottom when messages change
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
-
   return (
     <div className="chatbot-container">
+     
+      {!isOpen && (
+        <div className="chatbot-button" onClick={toggleChat} aria-label="Open chat">
+          
+        </div>
+      )}
+
+      
       {isOpen && (
         <div className="chat-window">
           <div className="chat-header">
-            Smart Dharani Bot
-            <button className="chat-close-btn" onClick={toggleChat} aria-label="Close chat">
+            <span>🌾 Smart Dharani</span>
+            <button className="chat-close-btn" onClick={toggleChat}>
               ✕
             </button>
           </div>
+
           <div className="chat-body">
             {messages.map((msg, idx) => (
               <div key={idx} className={`message ${msg.sender}`}>
                 {msg.text}
               </div>
             ))}
+            {isLoading && <div className="message bot">Typing...</div>}
             <div ref={messagesEndRef} />
           </div>
+
           <div className="chat-input-area">
             <input
               type="text"
-              placeholder="Type a message..."
+              placeholder="Ask about land records, survey numbers..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSend();
-                }
-              }}
-              aria-label="Enter your message"
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
               disabled={isLoading}
             />
             <button onClick={handleSend} disabled={!input.trim() || isLoading}>
               {isLoading ? "..." : "Send"}
             </button>
           </div>
-        </div>
-      )}
-      {!isOpen && (
-        <div className="chatbot-button" onClick={toggleChat} aria-label="Open chat">
-          💬
         </div>
       )}
     </div>

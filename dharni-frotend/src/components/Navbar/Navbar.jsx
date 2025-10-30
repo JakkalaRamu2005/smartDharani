@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import './navbar.css';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = React.useContext(AuthContext);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -62,6 +64,8 @@ export default function Navbar() {
               Join Us
             </Link>
           </li>
+
+          <button onClick={logout}>Logout</button>
         </ul>
 
         {/* CTA Button */}
