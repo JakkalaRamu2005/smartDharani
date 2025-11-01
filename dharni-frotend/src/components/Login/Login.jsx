@@ -32,7 +32,8 @@ function Login() {
       );
 
       const token = data.token;
-      login(token);
+      const userId = data.userId;
+      login(token, userId);
       setSuccessMsg("✅ Login successful! Redirecting...");
       setTimeout(() => navigate("/", { replace: true }), 1500);
     } catch (err) {

@@ -1,80 +1,104 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.css';
 import { AuthContext } from '../context/AuthContext';
+import ProfileWidget from '../Profile/ProfileWidget';
+import { getProfile } from '../utils/api';
+import { socket } from '../socket/socket';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, logout } = React.useContext(AuthContext);
+  const { user, setUser, userId } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (userId && !user) {
+      fetchUserProfile();
+    }
+
+    // Listen for real-time online/offline updates
+    socket.on('user_online', (data) => {
+      if (data.userId === userId) {
+        setUser(prev => ({ ...prev, is_online: true }));
+      }
+    });
+
+    socket.on('user_offline', (data) => {
+      if (data.userId === userId) {
+        setUser(prev => ({ ...prev, is_online: false }));
+      }
+    });
+
+    return () => {
+      socket.off('user_online');
+      socket.off('user_offline');
+    };
+  }, [userId]);
+
+  const fetchUserProfile = async () => {
+    try {
+      const data = await getProfile(userId);
+      setUser(data.user);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-        {/* Logo */}
-        <Link to="/" className="nav-logo">
-          <span className="logo-icon">🌱</span>
-          <span className="logo-text">Smart Dharani</span>
-        </Link>
+    <>
+      <nav className={`navbar ${isMenuOpen ? 'active' : ''}`}>
+        <div className="nav-container">
+          {/* Logo */}
+          <Link to="/" className="nav-logo">
+            <span className="logo-icon">🌱</span>
+            <span className="logo-text">Smart Dharani</span>
+          </Link>
 
-        {/* Hamburger Menu */}
+          {/* Navigation Links */}
+          <ul className="nav-menu">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">
+                <span className="nav-icon">🏠</span>
+                <span className="nav-label">Home</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/about" className="nav-link">
+                <span className="nav-icon">ℹ️</span>
+                <span className="nav-label">About</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/learn" className="nav-link">
+                <span className="nav-icon">📚</span>
+                <span className="nav-label">Learn</span>
+              </Link>
+            </li>
+          </ul>
+
+           <ProfileWidget user={user} />
+
+          {/* CTA Button */}
+          <div className="nav-cta">
+            <button className="ask-dharani-btn">
+              🎤 <span>Ask Dharani</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Hamburger Menu - Mobile Only */}
         <button className="nav-toggle" onClick={toggleMenu}>
           <span className={`hamburger ${isMenuOpen ? 'active' : ''}`}></span>
           <span className={`hamburger ${isMenuOpen ? 'active' : ''}`}></span>
           <span className={`hamburger ${isMenuOpen ? 'active' : ''}`}></span>
         </button>
+      </nav>
 
-        {/* Navigation Links */}
-        <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-          <li className="nav-item">
-            <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-              About
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/services" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-              Services
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/dashboard" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-              Dashboard
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/learn" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-              Learn
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/contact" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-              Contact
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/join" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-              Join Us
-            </Link>
-          </li>
-
-          <button onClick={logout}>Logout</button>
-        </ul>
-
-        {/* CTA Button */}
-        <div className="nav-cta">
-          <button className="ask-dharani-btn">
-            🎤 Ask Dharani
-          </button>
-        </div>
-      </div>
-    </nav>
+      {/* Profile Widget at Bottom */}
+     
+    </>
   );
 }
