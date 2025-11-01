@@ -1,4 +1,14 @@
 /* Overall container */
+.forgot-password-link {
+  text-align: right;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.forgot-password-link .switch-link {
+  font-size: 0.9rem;
+}
+
 .auth-container {
   min-height: 100vh;
   display: flex;

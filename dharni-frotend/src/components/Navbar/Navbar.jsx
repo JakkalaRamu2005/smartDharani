@@ -65,28 +65,13 @@ export default function Navbar() {
                 <span className="nav-label">Home</span>
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/about" className="nav-link">
-                <span className="nav-icon">ℹ️</span>
-                <span className="nav-label">About</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/learn" className="nav-link">
-                <span className="nav-icon">📚</span>
-                <span className="nav-label">Learn</span>
-              </Link>
-            </li>
+           
           </ul>
 
            <ProfileWidget user={user} />
 
           {/* CTA Button */}
-          <div className="nav-cta">
-            <button className="ask-dharani-btn">
-              🎤 <span>Ask Dharani</span>
-            </button>
-          </div>
+          
         </div>
 
         {/* Hamburger Menu - Mobile Only */}

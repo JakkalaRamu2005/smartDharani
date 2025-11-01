@@ -6,7 +6,10 @@ import cookieParser from "cookie-parser";
 import http from "http";
 import { Server } from "socket.io";
 
+
 import "./config/db.js"; // database connection
+
+import passwordResetRoutes from "./routes/passwordResetRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import dharaniRoutes from "./routes/dharaniRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
@@ -41,6 +44,11 @@ app.use(cookieParser());
 app.use("/api", profileRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/dharani", dharaniRoutes);
+
+
+// Add this route with your other routes
+app.use("/api/auth", passwordResetRoutes);
+
 
 // ✅ Socket.io Setup
 socketHandler(io);

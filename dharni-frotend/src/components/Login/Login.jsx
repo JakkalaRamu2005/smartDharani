@@ -66,6 +66,13 @@ function Login() {
             required
           />
 
+          <div className="forgot-password-link">
+            <span className="switch-link" onClick={() => navigate("/forgot-password")}>
+              Forgot Password?
+            </span>
+          </div>
+
+
           {errorMsg && <p className="error-msg">{errorMsg}</p>}
           {successMsg && <p className="success-msg">{successMsg}</p>}
 

@@ -6,18 +6,22 @@ import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Navbar from "./components/Navbar/Navbar";
-import Chatbot from "./components/Chatbot/Chatbot";
+
 import ProfileView from "./components/Profile/ProfileView";
 import ProfileEdit from "./components/Profile/ProfileEdit";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 
 const App = () => {
   return (
     <div className="App">
-      <Chatbot />
+     
       <Routes>
         {/* 🌐 Public Routes - No Navbar */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         {/* 🔒 Protected Routes - With Navbar */}
         <Route
@@ -55,6 +59,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        
       </Routes>
     </div>
   );
