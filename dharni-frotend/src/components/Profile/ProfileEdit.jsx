@@ -41,9 +41,9 @@ const ProfileEdit = () => {
       const data = await getProfile(userId);
       const user = data.user;
 
-      const socialLinks = typeof user.social_links === 'string'
-        ? JSON.parse(user.social_links)
-        : user.social_links || {};
+      const socialLinks = typeof user.sociallinks === 'string'
+        ? JSON.parse(user.sociallinks)
+        : user.sociallinks || {};
 
       setFormData({
     
@@ -52,11 +52,11 @@ const ProfileEdit = () => {
         qualification: user.qualification || '',
         passion: user.passion || '',
         crops: user.crops || '',
-        farm_size: user.farm_size || '',
+        farm_size: user.farmsize || '',
         experience: user.experience || '',
         languages: user.languages || '',
         about: user.about || '',
-        profile_photo: user.profile_photo || '',
+        profile_photo: user.profilephoto || '',
         social_links: {
           whatsapp: socialLinks.whatsapp || '',
           facebook: socialLinks.facebook || '',

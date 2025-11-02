@@ -48,42 +48,9 @@ export default function Navbar() {
   };
 
   return (
-    <>
-      <nav className={`navbar ${isMenuOpen ? 'active' : ''}`}>
-        <div className="nav-container">
-          {/* Logo */}
-          <Link to="/" className="nav-logo">
-            <span className="logo-icon">🌱</span>
-            <span className="logo-text">Smart Dharani</span>
-          </Link>
-
-          {/* Navigation Links */}
-          <ul className="nav-menu">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">
-                <span className="nav-icon">🏠</span>
-                <span className="nav-label">Home</span>
-              </Link>
-            </li>
-           
-          </ul>
-
-           <ProfileWidget user={user} />
-
-          {/* CTA Button */}
-          
-        </div>
-
-        {/* Hamburger Menu - Mobile Only */}
-        <button className="nav-toggle" onClick={toggleMenu}>
-          <span className={`hamburger ${isMenuOpen ? 'active' : ''}`}></span>
-          <span className={`hamburger ${isMenuOpen ? 'active' : ''}`}></span>
-          <span className={`hamburger ${isMenuOpen ? 'active' : ''}`}></span>
-        </button>
-      </nav>
-
-      {/* Profile Widget at Bottom */}
-     
-    </>
+   <>
+   
+   </>
   );
 }
+  

@@ -7,6 +7,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [username, setUsername] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,7 @@ function Register() {
     try {
       await axios.post(
         "http://localhost:9291/api/auth/register",
-        { email, password, confirmPassword },
+        { username, email, password, confirmPassword },
         { withCredentials: true }
       );
 
@@ -47,6 +49,13 @@ function Register() {
         <p className="auth-subtitle">Join us and start your journey today</p>
 
         <form onSubmit={handleRegister} className="auth-form">
+           <input
+            type="username"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
           <input
             type="email"
             placeholder="Enter your email"
@@ -70,6 +79,7 @@ function Register() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+           
 
           {errorMsg && <p className="error-msg">{errorMsg}</p>}
           {successMsg && <p className="success-msg">{successMsg}</p>}

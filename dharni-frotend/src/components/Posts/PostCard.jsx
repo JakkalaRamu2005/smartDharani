@@ -100,12 +100,12 @@ const PostCard = ({ post, onUpdate }) => {
       {/* Post Header */}
       <div className="post-header">
         <img
-          src={post.profile_photo || '/default-avatar.png'}
-          alt={post.email}
+          src={post.profilephoto || '/default-avatar.png'}
+          alt={post.username || post.email}
           className="post-user-photo"
         />
         <div className="post-user-info">
-          <h3>{post.email}</h3>
+          <h3>{post.username || post.email}</h3>
           <p className="post-meta">
             {post.role} • {post.location} • {new Date(post.created_at).toLocaleDateString()}
           </p>
@@ -161,7 +161,7 @@ const PostCard = ({ post, onUpdate }) => {
                   className="comment-user-photo"
                 />
                 <div className="comment-content">
-                  <strong>{comment.email}</strong>
+                  <strong>{comment.username || comment.email}</strong>
                   <p>{comment.content}</p>
                   <span className="comment-time">
                     {new Date(comment.created_at).toLocaleString()}

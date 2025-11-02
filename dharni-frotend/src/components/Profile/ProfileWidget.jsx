@@ -16,7 +16,7 @@ const ProfileWidget = ({ user }) => {
           className="profile-widget-photo"
         />
         <div className="profile-widget-info">
-          <p className="profile-widget-name">{user.name || 'Guest'}</p>
+          <p className="profile-widget-name">{user.username || 'Guest'}</p>
           <div className="profile-widget-status">
             <span className={`status-dot ${user.is_online ? 'online' : 'offline'}`}></span>
             <span className="status-text">{user.is_online ? 'Online' : 'Offline'}</span>

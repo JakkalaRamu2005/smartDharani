@@ -63,7 +63,7 @@ const PostFeed = () => {
           </div>
         ) : (
           posts.map(post => (
-            <PostCard key={post.id} post={post} onUpdate={fetchPosts} />
+            <PostCard key={Math.random()} post={post} onUpdate={fetchPosts} />
           ))
         )}
       </div>

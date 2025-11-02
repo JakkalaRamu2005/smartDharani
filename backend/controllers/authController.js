@@ -1,14 +1,16 @@
+
+
+
 import db from "../config/db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-
 export const registerUser = (req, res) => {
   console.log(req.body);
-  const { email, password, confirmPassword } = req.body;
+  const { username, email, password, confirmPassword } = req.body;
 
-  // Step 1: Check all fields
-  if (!email || !password || !confirmPassword) {
+  // Step 1: Validate all fields
+  if (!username || !email || !password || !confirmPassword) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -17,25 +19,49 @@ export const registerUser = (req, res) => {
     return res.status(400).json({ message: "Passwords do not match" });
   }
 
-  // Step 3: Hash the password (never store plain passwords)
-  const hashedPassword = bcrypt.hashSync(password, 10);
+  // Step 3: Validate username (optional - only letters, numbers, underscores)
+  const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+  if (!usernameRegex.test(username)) {
+    return res.status(400).json({
+      message: "Username must be 3-20 characters (letters, numbers, underscores only).",
+    });
+  }
 
-  // Step 4: Insert user into database
-  const sql = "INSERT INTO users (email, password) VALUES (?, ?)";
-  db.query(sql, [email, hashedPassword], (err) => {
+  // Step 4: Check if username or email already exists
+  const checkQuery = "SELECT * FROM users WHERE email = ? OR username = ?";
+  db.query(checkQuery, [email, username], (err, results) => {
     if (err) {
-      console.error("Database error during registration:", err);
-      
-      // Check for duplicate email
-      if (err.code === 'ER_DUP_ENTRY') {
-        return res.status(400).json({ message: "Email already exists" });
-      }
-      
-      return res.status(500).json({ message: "Error saving user. Please try again." });
+      console.error("Database error:", err);
+      return res.status(500).json({ message: "Database error. Try again." });
     }
-    res.status(200).json({ message: "User registered successfully!" });
+
+    if (results.length > 0) {
+      const existingUser = results[0];
+      if (existingUser.email === email) {
+        return res.status(400).json({ message: "Email already exists." });
+      }
+      if (existingUser.username === username) {
+        return res.status(400).json({ message: "Username already taken." });
+      }
+    }
+
+    // Step 5: Hash password
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
+    // Step 6: Insert user into database
+    const insertQuery =
+      "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+    db.query(insertQuery, [username, email, hashedPassword], (err) => {
+      if (err) {
+        console.error("Database error during registration:", err);
+        return res.status(500).json({ message: "Error saving user. Try again." });
+      }
+
+      res.status(200).json({ message: "✅ Registration successful!" });
+    });
   });
 };
+
 
 
 
@@ -61,7 +87,7 @@ export const loginUser = (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user.id, email: user.email, username: user.username }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 

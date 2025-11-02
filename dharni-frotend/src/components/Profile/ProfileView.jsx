@@ -56,7 +56,7 @@ const ProfileView = () => {
     return <div className="error-message">Profile not found</div>;
   }
 
-  const socialLinks = typeof user.social_links === 'string'
+  const socialLinks = typeof user.sociallinks === 'string'
     ? JSON.parse(user.social_links)
     : user.social_links || {};
 
@@ -65,12 +65,13 @@ const ProfileView = () => {
       {/* Profile Header */}
       <div className="profile-header">
         <img
-          src={user.profile_photo || '/default-avatar.png'}
+          src={user.profilephoto || '/default-avatar.png'}
           alt={user.name}
           className="profile-photo-large"
         />
         <div className="profile-header-info">
-          <h1>{user.email || 'Anonymous'}</h1>
+          <h1>{user.username || user.email}</h1>
+          <p className='user-email'>{user.email}</p>
           <div className="online-status">
             <span className={`status-dot ${user.is_online ? 'online' : 'offline'}`}></span>
             <span>
@@ -120,7 +121,7 @@ const ProfileView = () => {
           </div>
           <div className="profile-info-row">
             <span className="info-label">📐 Farm Size:</span>
-            <span className="info-value">{user.farm_size || 'Not specified'}</span>
+            <span className="info-value">{user.farmsize || 'Not specified'}</span>
           </div>
           <div className="profile-info-row">
             <span className="info-label">⏳ Experience:</span>
