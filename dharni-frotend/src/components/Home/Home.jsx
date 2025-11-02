@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Mic, Play, X, Volume2 } from 'lucide-react'
 import './home.css'
+import PostFeed from '../Posts/PostFeed'
 
 const languages = {
   en: { code: 'EN', name: 'English' },
@@ -176,13 +177,14 @@ function Home({ currentLang, setCurrentLang, languages: langs }) {
 
   return (
     <div className="home-page">
-      <Hero 
+      {/* <Hero 
         content={content[activeLang]}
         onVoiceClick={handleVoiceClick}
       />
       {isVoiceModalOpen && (
         <VoiceModal onClose={closeVoiceModal} />
-      )}
+      )} */}
+       <PostFeed />
     </div>
   )
 }

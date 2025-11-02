@@ -14,6 +14,8 @@ import authRoutes from "./routes/authRoutes.js";
 import dharaniRoutes from "./routes/dharaniRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import { socketHandler } from "./socketHandler.js"; // your socket logic
+import postRoutes from './routes/postRoutes.js';
+import statsRoutes from './routes/statsRoutes.js';
 
 dotenv.config();
 
@@ -48,6 +50,8 @@ app.use("/api/dharani", dharaniRoutes);
 
 // Add this route with your other routes
 app.use("/api/auth", passwordResetRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/stats', statsRoutes);
 
 
 // ✅ Socket.io Setup

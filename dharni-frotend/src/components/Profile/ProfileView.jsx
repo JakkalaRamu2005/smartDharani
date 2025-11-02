@@ -4,11 +4,32 @@ import { getProfile } from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import './styles/profileView.css';
 
+import axios from 'axios';
+import PostCard from '../Posts/PostCard';
+
 const ProfileView = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const { userId } = useContext(AuthContext);
+  const [userPosts, setUserPosts] = useState([]);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (userId) {
+      fetchUserPosts();
+    }
+  }, [userId]);
+
+  const fetchUserPosts = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:9291/api/posts/user/${userId}`,
+        { withCredentials: true }
+      );
+      setUserPosts(response.data.posts);
+    } catch (error) {
+      console.error('Error fetching user posts:', error);
+    }
+  };
 
   useEffect(() => {
     if (userId) {
@@ -151,12 +172,36 @@ const ProfileView = () => {
           </div>
         </div>
       )}
+      {/* User's Posts */}
+      {/* User Posts */}
+      {userPosts.length > 0 && (
+        <div className="profile-card">
+          <h2>📝 Posts</h2>
+          <div className="user-posts">
+            {userPosts.map(post => (
+              <PostCard key={post.id} post={post} onUpdate={fetchUserPosts} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Message Button */}
       <div className="profile-actions">
         <button className="message-btn">💬 Message</button>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
   );
 };
 

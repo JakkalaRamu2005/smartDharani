@@ -1,0 +1,46 @@
+.post-feed-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.active-users-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.active-users-banner strong {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-posts p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
