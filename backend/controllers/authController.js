@@ -99,6 +99,14 @@ export const loginUser = (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
-    res.status(200).json({ message: "Login successful", token, userId: user.id });
+    // Send back necessary user data
+    res.json({
+      message: "Login successful",
+      token,
+      userId: user.id,
+      username: user.username
+    });
+
+    res.status(200).json({ message: "Login successful", token, userId: user.id, username: user.username});
   });
 };

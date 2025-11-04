@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { connectSocket, disconnectSocket } from '../socket/socket';
+
 
 export const AuthContext = createContext();
 

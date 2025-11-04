@@ -33,7 +33,7 @@ function Register() {
         { withCredentials: true }
       );
 
-      setSuccessMsg("✅ Registration successful! Redirecting to login...");
+      setSuccessMsg("Registration successful! Redirecting to login...");
       setTimeout(() => navigate("/login", { replace: true }), 1500);
     } catch (err) {
       setErrorMsg(err.response?.data?.message || "Registration failed. Try again.");
@@ -45,7 +45,7 @@ function Register() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2 className="auth-title">Create Account ✨</h2>
+        <h2 className="auth-title">Create Account</h2>
         <p className="auth-subtitle">Join us and start your journey today</p>
 
         <form onSubmit={handleRegister} className="auth-form">

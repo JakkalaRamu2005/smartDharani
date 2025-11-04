@@ -29,7 +29,9 @@ function Login() {
         "http://localhost:9291/api/auth/login",
         { email, password },
         { withCredentials: true }
+       
       );
+      // console.log(`this is data`);
 
       const token = data.token;
       const userId = data.userId;
