@@ -7,6 +7,7 @@ import Home from './components/Home/Home';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import About from './components/About/About';
 import Layout from './components/Layout/Layout';
+import IssueDiagnosis from './components/IssueDiagnosis/IssueDiagnosis';
 
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ResetPassword from './components/ResetPassword/ResetPassword';
@@ -26,7 +27,8 @@ const App = () => {
         <Route path="/crop-selection" element={<CropSelection/>}/>
         {/* Protected Routes - With BOTH Top Navbar AND Sidebar */}
 
-        <Route path="/about" element={<About/>}></Route>
+        <Route path="/about" element={<About/>} />
+        <Route path="/issue-diagnosis" element={<IssueDiagnosis/>}/>
       </Routes>
 
 
