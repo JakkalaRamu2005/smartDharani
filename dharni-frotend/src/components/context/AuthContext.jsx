@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
       // Set initial user data with username
       setUser({ username: storedUsername });
       
-      connectSocket(storedUserId);
+      
     } else {
       setIsAuthenticated(false);
     }
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
     setUserId(userIdFromServer);
     setUser({ username }); // Set username in context
     
-    connectSocket(userIdFromServer);
+    
   };
 
   const logout = () => {
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setUserId(null);
     
-    disconnectSocket();
+   
   };
 
   return (
