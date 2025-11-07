@@ -10,6 +10,7 @@ import authRoutes from './routes/authRoutes.js';
 import dharaniRoutes from './routes/dharaniRoutes.js';
 import cropRoutes from './routes/cropRoutes.js';
 import diagnosisRoutes from './routes/diagnosisRoutes.js';
+import marketplaceRoutes from './routes/marketplaceRoutes.js';
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
@@ -35,6 +36,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/dharani', dharaniRoutes);
 app.use('/api/auth', passwordResetRoutes);
 app.use('/api/crop', cropRoutes);
+app.use('/api/marketplace', marketplaceRoutes);
 
 // Base route
 app.get('/', (req, res) => {

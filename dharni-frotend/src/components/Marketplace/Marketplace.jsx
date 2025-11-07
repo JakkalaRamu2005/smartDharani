@@ -37,7 +37,7 @@ const Marketplace = () => {
   const fetchListings = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/marketplace/listings');
+      const response = await fetch('http://localhost:9291/api/marketplace/listings');
       const data = await response.json();
       if (data.success) {
         setListings(data.data);
@@ -54,7 +54,7 @@ const Marketplace = () => {
       // In a real app, you'd get user ID from auth context
       const userId = localStorage.getItem('userId');
       if (userId) {
-        const response = await fetch(`http://localhost:5000/api/marketplace/listings/user/${userId}`);
+        const response = await fetch(`http://localhost:9291/api/marketplace/listings/user/${userId}`);
         const data = await response.json();
         if (data.success) {
           setUserListings(data.data);
@@ -91,7 +91,7 @@ const Marketplace = () => {
         userId
       };
 
-      const response = await fetch('http://localhost:5000/api/marketplace/listings', {
+      const response = await fetch('http://localhost:9291/api/marketplace/listings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -112,7 +112,7 @@ const Marketplace = () => {
     if (!window.confirm('Are you sure you want to delete this listing?')) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/marketplace/listings/${listingId}`, {
+      const response = await fetch(`http://localhost:9291/api/marketplace/listings/${listingId}`, {
         method: 'DELETE'
       });
 
@@ -139,7 +139,7 @@ const Marketplace = () => {
         sellerId: selectedProduct.userId
       };
 
-      const response = await fetch('http://localhost:5000/api/marketplace/inquiries', {
+      const response = await fetch('http://localhost:9291/api/marketplace/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
