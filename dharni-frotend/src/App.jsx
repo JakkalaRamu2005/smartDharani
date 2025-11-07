@@ -12,7 +12,8 @@ import IssueDiagnosis from './components/IssueDiagnosis/IssueDiagnosis';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import CropSelection from './components/CropSelection/CropSelection';
-
+import FarmingGuides from './components/FarmingGuides/FarmingGuides';
+import Marketplace from './components/Marketplace/Marketplace';
 const App = () => {
   return (
     <div className="App">
@@ -29,6 +30,8 @@ const App = () => {
 
         <Route path="/about" element={<About/>} />
         <Route path="/issue-diagnosis" element={<IssueDiagnosis/>}/>
+        <Route path="/farming-guides" element={<FarmingGuides/>}/>
+        <Route path="/marketplace" element={<Marketplace/>}/>
       </Routes>
 
 

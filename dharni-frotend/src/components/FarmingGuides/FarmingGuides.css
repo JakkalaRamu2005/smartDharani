@@ -1,0 +1,280 @@
+.farming-guides-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.guides-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.guides-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a4d2e;
+  margin: 0 0 12px 0;
+}
+
+.guides-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 40px;
+}
+
+.search-box {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 45px 14px 16px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #1a4d2e;
+  box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+/* Filters Section */
+.filters-section {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  color: #666;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-button:hover {
+  border-color: #1a4d2e;
+  color: #1a4d2e;
+}
+
+.filter-button.active {
+  background: #1a4d2e;
+  border-color: #1a4d2e;
+  color: white;
+}
+
+/* Guides Grid */
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.guide-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.guide-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.guide-image {
+  height: 200px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.guide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.guide-card:hover .guide-image img {
+  transform: scale(1.08);
+}
+
+.guide-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.guide-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.category-badge {
+  background: #f0f8f4;
+  color: #1a4d2e;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.time-badge {
+  font-size: 12px;
+  color: #888;
+}
+
+.guide-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a4d2e;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+.guide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.level-badge {
+  font-size: 13px;
+  color: #666;
+}
+
+.level-badge strong {
+  color: #1a4d2e;
+}
+
+.read-button {
+  background: none;
+  border: none;
+  color: #1a4d2e;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 0;
+}
+
+.read-button:hover {
+  color: #2d7a4c;
+}
+
+/* No Results */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+}
+
+.no-results p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .farming-guides-page {
+    padding: 15px;
+  }
+
+  .guides-title {
+    font-size: 28px;
+  }
+
+  .guides-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-buttons {
+    gap: 8px;
+  }
+
+  .filter-button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .guide-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .guides-title {
+    font-size: 24px;
+  }
+
+  .guides-grid {
+    gap: 16px;
+  }
+
+  .guide-content {
+    padding: 16px;
+  }
+
+  .guide-image {
+    height: 150px;
+  }
+}
