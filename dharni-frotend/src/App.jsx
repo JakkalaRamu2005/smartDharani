@@ -10,7 +10,7 @@ import Layout from './components/Layout/Layout';
 
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ResetPassword from './components/ResetPassword/ResetPassword';
-
+import CropSelection from './components/CropSelection/CropSelection';
 
 const App = () => {
   return (
@@ -23,6 +23,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/" element={<Home/>}/>
+        <Route path="/crop-selection" element={<CropSelection/>}/>
         {/* Protected Routes - With BOTH Top Navbar AND Sidebar */}
 
         <Route path="/about" element={<About/>}></Route>

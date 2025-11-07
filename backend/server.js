@@ -8,6 +8,7 @@ import './config/db.js';
 import passwordResetRoutes from './routes/passwordResetRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import dharaniRoutes from './routes/dharaniRoutes.js';
+import cropRoutes from './routes/cropRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/dharani', dharaniRoutes);
 app.use('/api/auth', passwordResetRoutes);
+app.use('/api/crop', cropRoutes);
 
 // Base route
 app.get('/', (req, res) => {
