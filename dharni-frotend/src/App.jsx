@@ -14,6 +14,7 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import CropSelection from './components/CropSelection/CropSelection';
 import FarmingGuides from './components/FarmingGuides/FarmingGuides';
 import Marketplace from './components/Marketplace/Marketplace';
+import Contact from './components/Contact/contact';
 const App = () => {
   return (
     <div className="App">
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/issue-diagnosis" element={<IssueDiagnosis/>}/>
         <Route path="/farming-guides" element={<FarmingGuides/>}/>
         <Route path="/marketplace" element={<Marketplace/>}/>
+        <Route path='/contact' element={<Contact/>}/>
       </Routes>
 
 
