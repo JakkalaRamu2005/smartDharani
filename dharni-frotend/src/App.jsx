@@ -15,30 +15,39 @@ import CropSelection from './components/CropSelection/CropSelection';
 import FarmingGuides from './components/FarmingGuides/FarmingGuides';
 import Marketplace from './components/Marketplace/Marketplace';
 import Contact from './components/Contact/contact';
+import Profile from './components/Profile/Profile';
+import EditProfile from './components/Profile/EditProfile';
 const App = () => {
   return (
     <div className="App">
-      <Layout>
-         <Routes>
+
+      <Routes>
         {/* Public Routes - No Navbar */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path="/" element={<Home/>}/>
-        <Route path="/crop-selection" element={<CropSelection/>}/>
-        {/* Protected Routes - With BOTH Top Navbar AND Sidebar */}
 
-        <Route path="/about" element={<About/>} />
-        <Route path="/issue-diagnosis" element={<IssueDiagnosis/>}/>
-        <Route path="/farming-guides" element={<FarmingGuides/>}/>
-        <Route path="/marketplace" element={<Marketplace/>}/>
-        <Route path='/contact' element={<Contact/>}/>
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/crop-selection" element={<CropSelection />} />
+            {/* Protected Routes - With BOTH Top Navbar AND Sidebar */}
+
+            <Route path="/about" element={<About />} />
+            <Route path="/issue-diagnosis" element={<IssueDiagnosis />} />
+            <Route path="/farming-guides" element={<FarmingGuides />} />
+            <Route path="/marketplace" element={<Marketplace />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+          </Route>
+        </Route>
       </Routes>
 
 
-      </Layout>
-     
+
+
     </div>
   );
 };

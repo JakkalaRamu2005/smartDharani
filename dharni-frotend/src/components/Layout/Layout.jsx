@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from '../Home/Sidebar';
 import TopNavbar from './TopNavbar';
 import './styles/Layout.css';
+import { Outlet } from 'react-router';
 
 const Layout = ({ children }) => {
   return (
@@ -11,7 +12,7 @@ const Layout = ({ children }) => {
       <div className="layout-main">
         <TopNavbar />
         <div className="layout-content">
-          {children}
+          <Outlet/>
         </div>
       </div>
     </div>

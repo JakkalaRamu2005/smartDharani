@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 // import Cookies from "js-cookie";
 import { AuthContext } from "../context/AuthContext";
 
 function ProtectedRoute({ children }) {
   // const token = Cookies.get("token"); // read token from cookie
   const {isAuthenticated} = useContext(AuthContext);
+  
+
 
 
   if (!isAuthenticated) {
@@ -14,7 +16,7 @@ function ProtectedRoute({ children }) {
   }
 
   // if cookie found, allow access
-  return children;
+  return <Outlet/>;
 }
 
 export default ProtectedRoute;

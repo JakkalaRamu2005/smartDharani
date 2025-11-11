@@ -15,7 +15,11 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/", { replace: true });
+    if (isAuthenticated){
+      navigate("/", { replace: true });
+
+    }
+    
   }, [isAuthenticated, navigate]);
 
   const handleLogin = async (e) => {
