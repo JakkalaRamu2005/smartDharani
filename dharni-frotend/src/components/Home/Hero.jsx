@@ -10,7 +10,7 @@ const Hero = () => {
         <p className="hero-description">
           Your AI-powered farming assistant for smarter agriculture and better yields
         </p>
-        <Link to="/auth" className="hero-button">
+        <Link to="/login" className="hero-button">
           Get Started →
         </Link>
       </div>

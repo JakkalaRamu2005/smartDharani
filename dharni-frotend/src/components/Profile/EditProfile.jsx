@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import "./ProfileEdit.css"
-
 
 const EditProfile = () => {
   const { userId } = useContext(AuthContext);
@@ -25,10 +24,7 @@ const EditProfile = () => {
 
   const fetchProfile = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:9291/api/profile/${userId}`,
-        { withCredentials: true }
-      );
+      const { data } = await axiosInstance.get(`/profile/${userId}`);
       setFormData({
         full_name: data.full_name || '',
         phone: data.phone || '',
@@ -38,7 +34,9 @@ const EditProfile = () => {
         profile_image: data.profile_image || ''
       });
     } catch (err) {
-      console.error('Failed to load profile');
+      if (err.response?.status === 401) {
+        navigate('/login', { replace: true });
+      }
     }
   };
 
@@ -55,15 +53,15 @@ const EditProfile = () => {
     setMessage('');
 
     try {
-      await axios.put(
-        `http://localhost:9291/api/profile/${userId}`,
-        formData,
-        { withCredentials: true }
-      );
+      await axiosInstance.put(`/profile/${userId}`, formData);
       setMessage('✅ Profile updated successfully!');
       setTimeout(() => navigate('/profile'), 2000);
     } catch (err) {
-      setMessage('❌ Failed to update profile');
+      if (err.response?.status === 401) {
+        navigate('/login', { replace: true });
+      } else {
+        setMessage('❌ Failed to update profile');
+      }
     } finally {
       setLoading(false);
     }

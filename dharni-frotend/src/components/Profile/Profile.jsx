@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance';
 import { AuthContext } from '../context/AuthContext';
-import "./Profile.css"
+import { useNavigate } from 'react-router-dom';
+import './Profile.css';
 
 const Profile = () => {
   const { userId } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -15,14 +17,15 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:9291/api/profile/${userId}`,
-        { withCredentials: true }
-      );
+      const { data } = await axiosInstance.get(`/profile/${userId}`);
       setProfile(data);
       setLoading(false);
     } catch (err) {
-      setError('Failed to load profile');
+      if (err.response?.status === 401) {
+        navigate('/login', { replace: true });
+      } else {
+        setError('Failed to load profile');
+      }
       setLoading(false);
     }
   };

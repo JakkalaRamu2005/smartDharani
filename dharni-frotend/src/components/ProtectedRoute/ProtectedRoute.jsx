@@ -3,12 +3,10 @@ import { Navigate, Outlet } from "react-router-dom";
 // import Cookies from "js-cookie";
 import { AuthContext } from "../context/AuthContext";
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute() {
   // const token = Cookies.get("token"); // read token from cookie
   const {isAuthenticated} = useContext(AuthContext);
   
-
-
 
   if (!isAuthenticated) {
     // if cookie not found, send user to login
