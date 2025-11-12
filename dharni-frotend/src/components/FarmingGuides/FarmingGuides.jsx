@@ -11,7 +11,7 @@ const FarmingGuides = () => {
     {
       id: 1,
       title: "Beginner's Guide to Rice Cultivation",
-      image: '/lovable-uploads/11fc7518-8429-4c53-9920-cf1fc521eb1b.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936090/cuttoncultivation_y9kucx.jpg',
       category: 'Grains',
       level: 'Beginner',
       time: '15 min read',
@@ -20,7 +20,7 @@ const FarmingGuides = () => {
     {
       id: 2,
       title: 'Cotton Cultivation Guide (Telugu)',
-      image: '/lovable-uploads/446b8ed0-70ed-4f85-9895-282a141f65f3.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936090/cotton-cultivation_kejbba.jpg',
       category: 'Grains',
       level: 'Intermediate',
       time: '20 min read',
@@ -29,7 +29,7 @@ const FarmingGuides = () => {
     {
       id: 3,
       title: 'Maize (Corn) Farming Practices',
-      image: '/lovable-uploads/5161da8d-74b2-4074-bec0-4874125b3602.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936090/maizefarming_jppaaj.jpg',
       category: 'Grains',
       level: 'Intermediate',
       time: '15 min read',
@@ -38,7 +38,7 @@ const FarmingGuides = () => {
     {
       id: 4,
       title: 'Redgram Cultivation (Kandulu)',
-      image: '/lovable-uploads/0eddb35d-8dfe-4159-a34c-9b8e4dda28f0.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936091/red-gram-cultivation_keapq2.jpg',
       category: 'Pulses',
       level: 'Intermediate',
       time: '12 min read',
@@ -47,7 +47,7 @@ const FarmingGuides = () => {
     {
       id: 5,
       title: 'Greengram & Blackgram Farming',
-      image: '/lovable-uploads/446b8ed0-70ed-4f85-9895-282a141f65f3.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936090/greengram_and_blackgram_j6egrm.jpg',
       category: 'Pulses',
       level: 'Intermediate',
       time: '12 min read',
@@ -56,7 +56,7 @@ const FarmingGuides = () => {
     {
       id: 6,
       title: 'Groundnut Cultivation Guide',
-      image: '/lovable-uploads/11fc7518-8429-4c53-9920-cf1fc521eb1b.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936090/groundnut-cultivation_iemyec.jpg',
       category: 'Oilseeds',
       level: 'Intermediate',
       time: '15 min read',
@@ -65,7 +65,7 @@ const FarmingGuides = () => {
     {
       id: 7,
       title: 'Organic Vegetable Farming Techniques',
-      image: '/lovable-uploads/446b8ed0-70ed-4f85-9895-282a141f65f3.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936091/organic-vegitablefarming_h1wp2p.jpg',
       category: 'Vegetables',
       level: 'Intermediate',
       time: '20 min read',
@@ -74,7 +74,7 @@ const FarmingGuides = () => {
     {
       id: 8,
       title: 'Efficient Irrigation for Small Farms',
-      image: '/lovable-uploads/5161da8d-74b2-4074-bec0-4874125b3602.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936090/efficient_irrigation_aijkzi.jpg',
       category: 'Techniques',
       level: 'All Levels',
       time: '10 min read',
@@ -83,7 +83,7 @@ const FarmingGuides = () => {
     {
       id: 9,
       title: 'Natural Pest Control Strategies',
-      image: '/lovable-uploads/0eddb35d-8dfe-4159-a34c-9b8e4dda28f0.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936090/natural-pest-control_lhphct.jpg',
       category: 'Protection',
       level: 'Intermediate',
       time: '12 min read',
@@ -92,7 +92,7 @@ const FarmingGuides = () => {
     {
       id: 10,
       title: 'All in one Guide for Vegetables Cultivation',
-      image: '/lovable-uploads/446b8ed0-70ed-4f85-9895-282a141f65f3.png',
+      image: 'https://res.cloudinary.com/dcsglluc4/image/upload/v1762936090/all_in_one_guide_for_vegetables_tsfqox.jpg',
       category: 'Vegetables',
       level: 'Comprehensive',
       time: '5 hrs read',
