@@ -5,7 +5,7 @@ import "./chatbot.css";
 function SmartDharaniBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello ! I’m Smart Dharani — your assistant for Telangana land records. How can I help you today?" },
+    { sender: "bot", text: "Hello ! I’m Smart Dharani — your assistant. How can I help you today?" },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);

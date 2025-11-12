@@ -49,14 +49,14 @@ export const loginUser = async (req, res) => {
         }
 
 
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET, {
             expiresIn: "1d",
         });
 
         res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV == 'Production',
-            sameSite: "strict",
+            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000
 
         })
@@ -82,3 +82,23 @@ export const logoutUser = (req, res) => {
 
     res.status(200).json({ message: "logged out successfully" });
 }
+
+export const verifyToken = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    res.status(200).json({ 
+      valid: true, 
+      userId: decoded.userId,
+      email: decoded.email
+    });
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+};

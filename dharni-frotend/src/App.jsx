@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Home from './components/Home/Home';
@@ -8,7 +8,6 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import About from './components/About/About';
 import Layout from './components/Layout/Layout';
 import IssueDiagnosis from './components/IssueDiagnosis/IssueDiagnosis';
-
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import CropSelection from './components/CropSelection/CropSelection';
@@ -17,10 +16,21 @@ import Marketplace from './components/Marketplace/Marketplace';
 import Contact from './components/Contact/contact';
 import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/EditProfile';
+import Chatbot from './components/Chatbot/Chatbot';
+
 const App = () => {
+  const location = useLocation();
+
+  // Pages where chatbot should NOT appear
+  const excludedPaths = ['/login', '/register', '/forgot-password', '/reset-password'];
+  
+  // Check if current path should show chatbot
+  const shouldShowChatbot = !excludedPaths.some(path => 
+    location.pathname.startsWith(path)
+  );
+
   return (
     <div className="App">
-
       <Routes>
         {/* Public Routes - No Navbar */}
         <Route path="/login" element={<Login />} />
@@ -28,12 +38,11 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
 
+        {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/crop-selection" element={<CropSelection />} />
-            {/* Protected Routes - With BOTH Top Navbar AND Sidebar */}
-
             <Route path="/about" element={<About />} />
             <Route path="/issue-diagnosis" element={<IssueDiagnosis />} />
             <Route path="/farming-guides" element={<FarmingGuides />} />
@@ -45,9 +54,8 @@ const App = () => {
         </Route>
       </Routes>
 
-
-
-
+      {/* Conditionally render chatbot */}
+      {shouldShowChatbot && <Chatbot />}
     </div>
   );
 };

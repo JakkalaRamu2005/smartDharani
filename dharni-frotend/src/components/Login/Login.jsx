@@ -37,10 +37,10 @@ function Login() {
       );
       // console.log(`this is data`);
 
-      const token = data.token;
+      
       const userId = data.userId;
       const username = data.username;
-      login(token, userId, username);
+      login(data.token, userId, username);
       setSuccessMsg("✅ Login successful! Redirecting...");
       setTimeout(() => navigate("/", { replace: true }), 1500);
     } catch (err) {
