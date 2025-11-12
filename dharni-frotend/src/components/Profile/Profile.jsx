@@ -12,15 +12,26 @@ const Profile = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    console.log('🔍 Profile component mounted, userId:', userId); // Debug
+    if (userId) {
+      fetchProfile();
+    } else {
+      setError('User ID not found');
+      setLoading(false);
+    }
+  }, [userId]);
 
   const fetchProfile = async () => {
     try {
+      console.log('📡 Fetching profile from API...'); // Debug
       const { data } = await axiosInstance.get(`/profile/${userId}`);
+      console.log('✅ Profile data received:', data); // Debug
+      
       setProfile(data);
       setLoading(false);
     } catch (err) {
+      console.error('❌ Error fetching profile:', err); // Debug
+      
       if (err.response?.status === 401) {
         navigate('/login', { replace: true });
       } else {

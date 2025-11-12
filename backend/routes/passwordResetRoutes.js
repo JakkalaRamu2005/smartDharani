@@ -1,19 +1,19 @@
-import express from "express";
-import { 
-  forgotPassword, 
-  verifyResetToken, 
-  resetPassword 
-} from "../controllers/passwordResetController.js";
+import express from 'express';
+import {
+  forgotPassword,
+  verifyResetToken,
+  resetPassword
+} from '../controllers/passwordResetController.js';
 
 const router = express.Router();
 
-// Request password reset
-router.post("/forgot-password", forgotPassword);
+// POST - Request password reset (send email)
+router.post('/forgot-password', forgotPassword);
 
-// Verify reset token
-router.get("/verify-token/:token", verifyResetToken);
+// GET - Verify reset token
+router.get('/verify-token/:token', verifyResetToken);
 
-// Reset password
-router.post("/reset-password/:token", resetPassword);
+// POST - Reset password with token
+router.post('/reset-password/:token', resetPassword);
 
 export default router;

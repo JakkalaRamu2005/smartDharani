@@ -14,11 +14,6 @@ export const authenticateToken = (req, res, next) => {
         req.userId = decoded.userId;
         next();
 
-
-
-
-
-
     } catch (error) {
         if (error.name == 'TokenExpiredError') {
 
