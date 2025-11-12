@@ -30,7 +30,7 @@ export const getProfile = async (req, res) => {
     }
 
     // ✅ FIX: Return the profile when it exists
-    console.log('✅ Profile found:', rows[0]);
+    // console.log('✅ Profile found:', rows[0]);
     return res.json(rows[0]);
 
   } catch (error) {
@@ -45,7 +45,7 @@ export const updateProfile = async (req, res) => {
     const userId = req.params.userId;
     const { full_name, phone, location, bio, profile_image, preferred_language } = req.body;
 
-    console.log('📝 Updating profile for userId:', userId); // Debug log
+    // console.log('📝 Updating profile for userId:', userId); // Debug log
 
     const [existing] = await db.execute(
       'SELECT * FROM user_profiles WHERE user_id = ?', 
@@ -63,7 +63,7 @@ export const updateProfile = async (req, res) => {
       );
     } else {
       // Update existing profile
-      console.log('🔄 Updating existing profile');
+      // console.log('🔄 Updating existing profile');
       
       // ✅ FIX: Corrected typo and added userId at the end
       await db.execute(
@@ -75,7 +75,7 @@ export const updateProfile = async (req, res) => {
       );
     }
 
-    console.log('✅ Profile updated successfully');
+    // console.log('✅ Profile updated successfully');
     res.json({ 
       message: 'Profile updated successfully', 
       success: true 

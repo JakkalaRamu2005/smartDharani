@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react'; // ✅ Add useContext
 import ListingForm from './ListingForm';
-
 import MarketplaceGrid from './MarketplaceGrid';
+import ContactModal from './contactModal';
+import { AuthContext } from '../context/AuthContext'; // ✅ Import AuthContext
 import './Marketplace.css';
 
 const Marketplace = () => {
-  const [activeTab, setActiveTab] = useState('browse'); // 'browse' or 'myListings'
+  const { userId } = useContext(AuthContext); // ✅ Get userId from AuthContext
+  
+  const [activeTab, setActiveTab] = useState('browse');
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCropType, setFilterCropType] = useState('All');
   const [filterPriceRange, setFilterPriceRange] = useState('All');
@@ -17,7 +20,6 @@ const Marketplace = () => {
   const [loading, setLoading] = useState(false);
   const [userListings, setUserListings] = useState([]);
 
-  // Unique options for filters
   const cropTypes = ['All', 'Rice', 'Wheat', 'Cotton', 'Tomato', 'Potato', 'Maize', 'Sugarcane', 'Groundnut', 'Vegetables'];
   const priceRanges = [
     { label: 'All', value: 'All' },
@@ -28,11 +30,12 @@ const Marketplace = () => {
   ];
   const locations = ['All', 'Hyderabad', 'Warangal', 'Nalgonda', 'Karimnagar', 'Adilabad', 'Khammam', 'Medak', 'Rangareddy'];
 
-  // Fetch listings from backend
   React.useEffect(() => {
     fetchListings();
-    fetchUserListings();
-  }, []);
+    if (userId) { // ✅ Only fetch if userId exists
+      fetchUserListings();
+    }
+  }, [userId]); // ✅ Re-fetch when userId changes
 
   const fetchListings = async () => {
     try {
@@ -41,9 +44,10 @@ const Marketplace = () => {
       const data = await response.json();
       if (data.success) {
         setListings(data.data);
+        console.log('✅ Fetched', data.data.length, 'listings');
       }
     } catch (error) {
-      console.error('Error fetching listings:', error);
+      console.error('❌ Error fetching listings:', error);
     } finally {
       setLoading(false);
     }
@@ -51,30 +55,27 @@ const Marketplace = () => {
 
   const fetchUserListings = async () => {
     try {
-      // In a real app, you'd get user ID from auth context
-      const userId = localStorage.getItem('userId');
-      if (userId) {
-        const response = await fetch(`http://localhost:9291/api/marketplace/listings/user/${userId}`);
-        const data = await response.json();
-        if (data.success) {
-          setUserListings(data.data);
-        }
+      // ✅ Use userId from AuthContext instead of localStorage
+      if (!userId) {
+        console.log('⚠️ No userId found, skipping user listings fetch');
+        return;
+      }
+
+      console.log('📋 Fetching user listings for userId:', userId);
+      
+      const response = await fetch(`http://localhost:9291/api/marketplace/listings/user/${userId}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        setUserListings(data.data);
+        console.log('✅ Fetched', data.data.length, 'user listings');
       }
     } catch (error) {
-      console.error('Error fetching user listings:', error);
+      console.error('❌ Error fetching user listings:', error);
     }
   };
 
-  // Filter listings based on search and filters
-  const filteredListings = listings.filter(listing => {
-    const matchesSearch = listing.produceName.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCrop = filterCropType === 'All' || listing.cropType === filterCropType;
-    const matchesLocation = filterLocation === 'All' || listing.location === filterLocation;
-    const matchesPrice = matchesPrice(listing.price, filterPriceRange);
-    return matchesSearch && matchesCrop && matchesLocation && matchesPrice;
-  });
-
-  const matchesPrice = (price, range) => {
+  const checkPriceMatch = (price, range) => {
     if (range === 'All') return true;
     if (range === '0-1000') return price <= 1000;
     if (range === '1000-5000') return price >= 1000 && price <= 5000;
@@ -83,13 +84,28 @@ const Marketplace = () => {
     return true;
   };
 
+  const filteredListings = listings.filter(listing => {
+    const matchesSearch = listing.produceName.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCrop = filterCropType === 'All' || listing.cropType === filterCropType;
+    const matchesLocation = filterLocation === 'All' || listing.location === filterLocation;
+    const matchesPrice = checkPriceMatch(listing.price, filterPriceRange);
+    return matchesSearch && matchesCrop && matchesLocation && matchesPrice;
+  });
+
   const handleAddListing = async (formData) => {
     try {
-      const userId = localStorage.getItem('userId');
+      // ✅ Use userId from AuthContext
+      if (!userId) {
+        alert('Please login to add a listing');
+        return;
+      }
+
       const payload = {
         ...formData,
-        userId
+        userId // ✅ Use userId from AuthContext
       };
+
+      console.log('📝 Adding listing with payload:', payload);
 
       const response = await fetch('http://localhost:9291/api/marketplace/listings', {
         method: 'POST',
@@ -98,13 +114,20 @@ const Marketplace = () => {
       });
 
       const data = await response.json();
+      
       if (data.success) {
+        console.log('✅ Listing added successfully');
         setShowListingForm(false);
-        fetchListings();
-        fetchUserListings();
+        await fetchListings(); // Refresh all listings
+        await fetchUserListings(); // Refresh user listings
+        alert('✅ Listing added successfully!');
+      } else {
+        console.error('❌ Failed to add listing:', data.message);
+        alert('Failed to add listing: ' + data.message);
       }
     } catch (error) {
-      console.error('Error adding listing:', error);
+      console.error('❌ Error adding listing:', error);
+      alert('Error adding listing. Please try again.');
     }
   };
 
@@ -117,12 +140,16 @@ const Marketplace = () => {
       });
 
       const data = await response.json();
+      
       if (data.success) {
-        fetchListings();
-        fetchUserListings();
+        console.log('✅ Listing deleted');
+        await fetchListings();
+        await fetchUserListings();
+        alert('✅ Listing deleted successfully!');
       }
     } catch (error) {
-      console.error('Error deleting listing:', error);
+      console.error('❌ Error deleting listing:', error);
+      alert('Error deleting listing. Please try again.');
     }
   };
 
@@ -146,18 +173,19 @@ const Marketplace = () => {
       });
 
       const data = await response.json();
+      
       if (data.success) {
         setShowContactModal(false);
-        alert('Inquiry sent! Seller will contact you within 2 hours.');
+        alert('✅ Inquiry sent! Seller will contact you within 2 hours.');
       }
     } catch (error) {
-      console.error('Error sending inquiry:', error);
+      console.error('❌ Error sending inquiry:', error);
+      alert('Error sending inquiry. Please try again.');
     }
   };
 
   return (
     <div className="marketplace-page">
-      {/* Header */}
       <div className="marketplace-header">
         <h1 className="marketplace-title">🛒 Smart Dharani Marketplace</h1>
         <p className="marketplace-subtitle">
@@ -165,7 +193,6 @@ const Marketplace = () => {
         </p>
       </div>
 
-      {/* Tab Navigation */}
       <div className="tab-navigation">
         <button
           className={`tab-button ${activeTab === 'browse' ? 'active' : ''}`}
@@ -181,10 +208,8 @@ const Marketplace = () => {
         </button>
       </div>
 
-      {/* Browse Tab */}
       {activeTab === 'browse' && (
         <div className="browse-section">
-          {/* Search Bar */}
           <div className="search-section">
             <input
               type="text"
@@ -196,7 +221,6 @@ const Marketplace = () => {
             <span className="search-icon">🔍</span>
           </div>
 
-          {/* Filters */}
           <div className="filters-section">
             <div className="filter-group">
               <label>Crop Type:</label>
@@ -250,7 +274,6 @@ const Marketplace = () => {
             </button>
           </div>
 
-          {/* Listings Grid */}
           <MarketplaceGrid
             listings={filteredListings}
             loading={loading}
@@ -259,7 +282,6 @@ const Marketplace = () => {
         </div>
       )}
 
-      {/* My Listings Tab */}
       {activeTab === 'myListings' && (
         <div className="my-listings-section">
           <div className="my-listings-header">
@@ -283,7 +305,11 @@ const Marketplace = () => {
             <div className="user-listings-grid">
               {userListings.map(listing => (
                 <div key={listing.id} className="user-listing-card">
-                  <img src={listing.imageUrl} alt={listing.produceName} className="listing-image" />
+                  <img 
+                    src={listing.imageUrl || 'https://via.placeholder.com/300x200?text=No+Image'} 
+                    alt={listing.produceName} 
+                    className="listing-image" 
+                  />
                   <div className="listing-info">
                     <h3>{listing.produceName}</h3>
                     <p className="price">₹{listing.price}/{listing.unit}</p>
@@ -310,7 +336,6 @@ const Marketplace = () => {
         </div>
       )}
 
-      {/* Contact Modal */}
       {showContactModal && (
         <ContactModal
           product={selectedProduct}
