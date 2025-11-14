@@ -13,7 +13,7 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import CropSelection from './components/CropSelection/CropSelection';
 import FarmingGuides from './components/FarmingGuides/FarmingGuides';
 import Marketplace from './components/Marketplace/Marketplace';
-import Contact from './components/Contact/contact';
+import Contact from './components/Contact/Contact.jsx';
 import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/EditProfile';
 import Chatbot from './components/Chatbot/Chatbot';
