@@ -22,13 +22,7 @@ const server = http.createServer(app);
 app.set('trust proxy', 1);
 
 // CORS Configuration
-app.use(cors({
-  origin: 'https://smartdharani-1.onrender.com',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['set-cookie']
-}));
+app.use(cors());
 
 
 app.use(cookieParser());
