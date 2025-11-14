@@ -40,7 +40,7 @@ const Marketplace = () => {
   const fetchListings = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://smartdharani.onrender.com/api/marketplace/listings');
+      const response = await fetch('https://smartdharani-2.onrender.com/api/marketplace/listings');
       const data = await response.json();
       if (data.success) {
         setListings(data.data);
@@ -63,7 +63,7 @@ const Marketplace = () => {
 
       console.log('📋 Fetching user listings for userId:', userId);
       
-      const response = await fetch(`https://smartdharani.onrender.com/api/marketplace/listings/user/${userId}`);
+      const response = await fetch(`https://smartdharani-2.onrender.com/api/marketplace/listings/user/${userId}`);
       const data = await response.json();
       
       if (data.success) {
@@ -107,7 +107,7 @@ const Marketplace = () => {
 
       console.log('📝 Adding listing with payload:', payload);
 
-      const response = await fetch('https://smartdharani.onrender.com/api/marketplace/listings', {
+      const response = await fetch('https://smartdharani-2.onrender.com/api/marketplace/listings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -135,7 +135,7 @@ const Marketplace = () => {
     if (!window.confirm('Are you sure you want to delete this listing?')) return;
 
     try {
-      const response = await fetch(`https://smartdharani.onrender.com/api/marketplace/listings/${listingId}`, {
+      const response = await fetch(`https://smartdharani-2.onrender.com/api/marketplace/listings/${listingId}`, {
         method: 'DELETE'
       });
 
@@ -166,7 +166,7 @@ const Marketplace = () => {
         sellerId: selectedProduct.userId
       };
 
-      const response = await fetch('https://smartdharani.onrender.com/api/marketplace/inquiries', {
+      const response = await fetch('https://smartdharani-2.onrender.com/api/marketplace/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

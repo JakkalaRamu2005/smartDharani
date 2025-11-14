@@ -30,7 +30,7 @@ function Login() {
 
     try {
       const { data } = await axios.post(
-        "https://smartdharani.onrender.com/api/auth/login",
+        "https://smartdharani-2.onrender.com/api/auth/login",
         { email, password },
         { withCredentials: true }
        

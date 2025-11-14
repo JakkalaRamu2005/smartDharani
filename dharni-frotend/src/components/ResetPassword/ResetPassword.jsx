@@ -24,7 +24,7 @@ function ResetPassword() {
   const verifyToken = async () => {
     try {
       const { data } = await axios.get(
-        `https://smartdharani.onrender.com/api/auth/verify-token/${token}`
+        `https://smartdharani-2.onrender.com/api/auth/verify-token/${token}`
       );
 
       if (data.valid) {
@@ -59,7 +59,7 @@ function ResetPassword() {
 
     try {
       const { data } = await axios.post(
-        `https://smartdharani.onrender.com/api/auth/reset-password/${token}`,
+        `https://smartdharani-2.onrender.com/api/auth/reset-password/${token}`,
         { newPassword, confirmPassword }
       );
 

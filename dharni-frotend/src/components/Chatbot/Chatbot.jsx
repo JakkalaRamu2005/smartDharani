@@ -28,7 +28,7 @@ function SmartDharaniBot() {
     setIsLoading(true);
 
     try {
-      const res = await axios.post("https://smartdharani.onrender.com/api/dharani/chat", {
+      const res = await axios.post("https://smartdharani-2.onrender.com/api/dharani/chat", {
         messages: [...messages, newUserMsg],
       });
 
