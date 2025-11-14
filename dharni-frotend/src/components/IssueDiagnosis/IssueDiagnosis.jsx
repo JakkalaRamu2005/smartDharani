@@ -94,7 +94,7 @@ const IssueDiagnosis = () => {
         language: selectedLanguage
       };
 
-      const response = await fetch('http://localhost:9291/api/diagnosis/diagnose', {
+      const response = await fetch('https://smartdharani.onrender.com/api/diagnosis/diagnose', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

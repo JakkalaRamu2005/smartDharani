@@ -47,7 +47,7 @@ const CropSelection = () => {
     setRecommendations(null);
 
     try {
-      const response = await fetch('http://localhost:9291/api/crop/recommendations', {
+      const response = await fetch('https://smartdharani.onrender.com/api/crop/recommendations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

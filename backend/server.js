@@ -23,7 +23,7 @@ app.set('trust proxy', 1);
 
 // CORS Configuration
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: '*',
   credentials: true,
   exposedHeaders: ['set-cookie']  // ✅ ADD THIS
 }));

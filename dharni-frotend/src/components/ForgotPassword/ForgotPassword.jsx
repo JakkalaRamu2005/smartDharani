@@ -18,7 +18,7 @@ function ForgotPassword() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:9291/api/auth/forgot-password",
+        "https://smartdharani.onrender.com/api/auth/forgot-password",
         { email }
       );
 

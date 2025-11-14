@@ -26,7 +26,7 @@ const Contact = () => {
 
         try {
             // Send data to backend API
-            const response = await fetch('http://localhost:9291/api/contact/submit', {
+            const response = await fetch('https://smartdharani.onrender.com/api/contact/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

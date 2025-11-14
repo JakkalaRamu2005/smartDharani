@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:9291/api',
+    baseURL: 'https://smartdharani.onrender.com/api',
     withCredentials: true,
 })
 

@@ -16,12 +16,10 @@ export const AuthProvider = ({ children }) => {
     const storedUserId = Cookies.get('userId');
     const storedUsername = Cookies.get('username');
 
-    console.log('🍪 Token exists:', !!token);
-    console.log('🍪 UserId exists:', !!storedUserId);
-    console.log('🍪 Username exists:', !!storedUsername);
+   
 
     if (token && storedUserId) {
-      console.log('✅ User is authenticated');
+      
       setIsAuthenticated(true);
       setUserId(storedUserId);
       setUser({ username: storedUsername });
@@ -34,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (token, userIdFromServer, username) => {
-    console.log('🔐 Login called with:', { token: !!token, userIdFromServer, username });
+   
     
     Cookies.set('token', token, { expires: 7 });
     Cookies.set('userId', userIdFromServer, { expires: 7 });

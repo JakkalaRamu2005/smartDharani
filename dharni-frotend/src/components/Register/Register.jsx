@@ -28,7 +28,7 @@ function Register() {
     setLoading(true);
     try {
       await axios.post(
-        "http://localhost:9291/api/auth/register",
+        "https://smartdharani.onrender.com/api/auth/register",
         { username, email, password, confirmPassword },
         { withCredentials: true }
       );
