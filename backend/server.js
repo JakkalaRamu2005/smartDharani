@@ -23,10 +23,13 @@ app.set('trust proxy', 1);
 
 // CORS Configuration
 app.use(cors({
-  origin: '*',
+  origin: 'https://smartdharani-1.onrender.com',
   credentials: true,
-  exposedHeaders: ['set-cookie']  // ✅ ADD THIS
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['set-cookie']
 }));
+
 
 app.use(cookieParser());
 app.use(express.json({ limit: '50mb' }));
