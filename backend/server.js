@@ -23,7 +23,11 @@ app.set('trust proxy', 1);
 
 // CORS Configuration
 app.use(cors({
-  origin: ['https://smartdharani-1.onrender.com/'],  // your frontend URL here
+  origin: [
+    'https://smartdharani-1.onrender.com',  // Production frontend
+    'http://localhost:5173',                // Local development
+    'http://localhost:3000'                 // Alternative local port
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
