@@ -17,46 +17,58 @@ import Contact from './components/Contact/Contact.jsx';
 import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/EditProfile';
 import Chatbot from './components/Chatbot/Chatbot';
+import ErrorBoundary from './components/utils/ErrorBoundary';
+import NotFound from './components/NotFound/NotFound';
 
 const App = () => {
   const location = useLocation();
 
   // Pages where chatbot should NOT appear
   const excludedPaths = ['/login', '/register', '/forgot-password', '/reset-password'];
-  
+
   // Check if current path should show chatbot
-  const shouldShowChatbot = !excludedPaths.some(path => 
+  const shouldShowChatbot = !excludedPaths.some(path =>
     location.pathname.startsWith(path)
   );
 
   return (
-    <div className="App">
-      <Routes>
-        {/* Public Routes - No Navbar */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
+    <ErrorBoundary>
+      <div className="App">
+        {/* Skip navigation for keyboard accessibility */}
+        <a href="#main-content" className="skip-to-main">
+          Skip to main content
+        </a>
 
-        {/* Protected Routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/crop-selection" element={<CropSelection />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/issue-diagnosis" element={<IssueDiagnosis />} />
-            <Route path="/farming-guides" element={<FarmingGuides />} />
-            <Route path="/marketplace" element={<Marketplace />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/edit-profile" element={<EditProfile />} />
+        <Routes>
+          {/* Public Routes - No Navbar */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/crop-selection" element={<CropSelection />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/issue-diagnosis" element={<IssueDiagnosis />} />
+              <Route path="/farming-guides" element={<FarmingGuides />} />
+              <Route path="/marketplace" element={<Marketplace />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/edit-profile" element={<EditProfile />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
 
-      {/* Conditionally render chatbot */}
-      {shouldShowChatbot && <Chatbot />}
-    </div>
+          {/* 404 Not Found - Catch all unmatched routes */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+
+        {/* Conditionally render chatbot */}
+        {shouldShowChatbot && <Chatbot />}
+      </div>
+    </ErrorBoundary>
   );
 };
 

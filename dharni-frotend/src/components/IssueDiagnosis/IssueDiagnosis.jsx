@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import LoadingSpinner from '../utils/LoadingSpinner';
+import SkeletonLoader from '../utils/SkeletonLoader';
 import './IssueDiagnosis.css';
 
 const IssueDiagnosis = () => {
@@ -8,7 +10,7 @@ const IssueDiagnosis = () => {
     cropType: '',
     symptoms: []
   });
-  
+
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -160,8 +162,8 @@ const IssueDiagnosis = () => {
         {/* Image Upload Section */}
         <div className="form-section">
           <h3 className="section-title">📸 Upload Crop Image</h3>
-          
-          <div 
+
+          <div
             className="image-upload-area"
             onClick={() => fileInputRef.current.click()}
           >
@@ -201,12 +203,16 @@ const IssueDiagnosis = () => {
         {/* Crop Type Section */}
         <div className="form-section">
           <h3 className="section-title">🌾 Crop Type</h3>
-          
+
+          <label htmlFor="crop-type-select" className="sr-only">Select crop type</label>
           <select
+            id="crop-type-select"
             value={formData.cropType}
             onChange={(e) => setFormData(prev => ({ ...prev, cropType: e.target.value }))}
             className="form-input"
             required
+            aria-required="true"
+            aria-label="Select the type of crop"
           >
             <option value="">Select Crop Type</option>
             {cropTypes.map(crop => (
@@ -218,7 +224,7 @@ const IssueDiagnosis = () => {
         {/* Symptoms Section */}
         <div className="form-section">
           <h3 className="section-title">⚠️ Observable Symptoms</h3>
-          
+
           <div className="symptoms-grid">
             {symptoms.map(symptom => (
               <label key={symptom.id} className="symptom-checkbox">
@@ -236,7 +242,7 @@ const IssueDiagnosis = () => {
         {/* Description Section */}
         <div className="form-section">
           <h3 className="section-title">📝 Problem Description</h3>
-          
+
           <textarea
             value={formData.description}
             onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
@@ -247,11 +253,17 @@ const IssueDiagnosis = () => {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="submit-button" disabled={loading}>
+        <button
+          type="submit"
+          className="submit-button"
+          disabled={loading}
+          aria-busy={loading}
+          aria-label={loading ? "Analyzing crop issue..." : "Diagnose crop issue"}
+        >
           {loading ? (
             <>
-              <span className="spinner"></span>
-              Analyzing...
+              <LoadingSpinner size="sm" color="white" label="Analyzing crop issue..." />
+              <span style={{ marginLeft: '8px' }}>Analyzing...</span>
             </>
           ) : (
             <>

@@ -1,0 +1,101 @@
+/* ==================== EMPTY STATE COMPONENT ==================== */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-8) var(--spacing-4);
+    min-height: 300px;
+}
+
+.empty-state-icon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-3);
+    opacity: 0.8;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.empty-state-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.empty-state-message {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    max-width: 400px;
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-4);
+}
+
+.empty-state-action {
+    margin-top: var(--spacing-2);
+}
+
+/* Variants */
+.empty-state--default {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-xl);
+}
+
+.empty-state--search {
+    background: var(--color-accent-blue-50);
+    border-radius: var(--radius-xl);
+}
+
+.empty-state--search .empty-state-title {
+    color: var(--color-accent-blue-700);
+}
+
+.empty-state--error {
+    background: var(--color-error-light);
+    background: linear-gradient(135deg, #fee 0%, #fdd 100%);
+    border-radius: var(--radius-xl);
+}
+
+.empty-state--error .empty-state-title {
+    color: var(--color-error-dark);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+    .empty-state {
+        padding: var(--spacing-6) var(--spacing-3);
+        min-height: 250px;
+    }
+
+    .empty-state-icon {
+        font-size: 4rem;
+    }
+
+    .empty-state-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .empty-state-message {
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .empty-state-icon {
+        animation: none;
+    }
+}

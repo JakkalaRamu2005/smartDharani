@@ -1,0 +1,181 @@
+/* ==================== FORM INPUT COMPONENT ==================== */
+
+.form-input-container {
+    margin-bottom: var(--spacing-4);
+    width: 100%;
+}
+
+.form-input-label {
+    display: block;
+    margin-bottom: var(--spacing-1);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+}
+
+.required-indicator {
+    color: var(--color-error);
+    margin-left: 4px;
+}
+
+.form-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-input-wrapper.focused {
+    /* Add glow effect when focused */
+}
+
+.form-input-icon {
+    position: absolute;
+    left: var(--spacing-2);
+    font-size: 1.25rem;
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--spacing-2) var(--spacing-3);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    border: 2px solid var(--color-border-medium);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: all var(--transition-base) var(--ease-in-out);
+}
+
+.form-input.has-icon {
+    padding-left: 3rem;
+}
+
+.form-input:focus {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-input::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+.form-input:disabled {
+    background-color: var(--color-gray-100);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Success State */
+.form-input-container.has-success .form-input {
+    border-color: var(--color-success);
+    padding-right: 3rem;
+}
+
+.form-input-container.has-success .form-input:focus {
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* Error State */
+.form-input-container.has-error .form-input {
+    border-color: var(--color-error);
+    padding-right: 3rem;
+    animation: shake 0.3s ease-in-out;
+}
+
+.form-input-container.has-error .form-input:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Status Icons */
+.form-input-status {
+    position: absolute;
+    right: var(--spacing-2);
+    font-size: 1.25rem;
+    pointer-events: none;
+    animation: fadeIn 0.2s ease-in;
+}
+
+.form-input-status.success {
+    color: var(--color-success);
+}
+
+.form-input-status.error {
+    color: var(--color-error);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Helper Text */
+.form-input-help {
+    margin-top: var(--spacing-1);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+.form-input-help.error {
+    color: var(--color-error);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+    .form-input {
+        font-size: var(--font-size-base);
+        padding: var(--spacing-2);
+    }
+
+    .form-input.has-icon {
+        padding-left: 2.5rem;
+    }
+
+    .form-input-icon {
+        left: var(--spacing-1);
+        font-size: 1.1rem;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .form-input,
+    .form-input-status {
+        animation: none;
+        transition: none;
+    }
+
+    @keyframes shake {
+        animation-duration: 0.01ms;
+    }
+}

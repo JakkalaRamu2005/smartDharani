@@ -1,0 +1,78 @@
+/* ==================== DARK MODE THEME ==================== */
+
+[data-theme="dark"] {
+    /* Primary Colors - Slightly brighter for dark mode */
+    --color-primary-50: #064e3b;
+    --color-primary-100: #065f46;
+    --color-primary-200: #047857;
+    --color-primary-300: #059669;
+    --color-primary-400: #10b981;
+    --color-primary-500: #34d399;
+    --color-primary-600: #6ee7b7;
+    --color-primary-700: #a7f3d0;
+    --color-primary-800: #d1fae5;
+    --color-primary-900: #ecfdf5;
+
+    /* Accent Colors */
+    --color-accent-blue-50: #1e3a8a;
+    --color-accent-blue-500: #60a5fa;
+    --color-accent-blue-600: #93c5fd;
+    --color-accent-blue-700: #dbeafe;
+
+    --color-accent-orange-50: #9a3412;
+    --color-accent-orange-500: #fb923c;
+    --color-accent-orange-600: #fdba74;
+    --color-accent-orange-700: #fed7aa;
+
+    /* Gray Scale - Inverted */
+    --color-gray-50: #1f2937;
+    --color-gray-100: #374151;
+    --color-gray-200: #4b5563;
+    --color-gray-300: #6b7280;
+    --color-gray-400: #9ca3af;
+    --color-gray-500: #d1d5db;
+    --color-gray-600: #e5e7eb;
+    --color-gray-700: #f3f4f6;
+    --color-gray-800: #f9fafb;
+    --color-gray-900: #ffffff;
+
+    /* Background Colors */
+    --color-bg-primary: #111827;
+    --color-bg-secondary: #1f2937;
+    --color-bg-tertiary: #374151;
+    --color-bg-dark: #000000;
+    --color-bg-overlay: rgba(0, 0, 0, 0.75);
+
+    /* Text Colors */
+    --color-text-primary: #f9fafb;
+    --color-text-secondary: #d1d5db;
+    --color-text-tertiary: #9ca3af;
+    --color-text-inverse: #111827;
+    --color-text-muted: #6b7280;
+
+    /* Border Colors */
+    --color-border-light: #374151;
+    --color-border-medium: #4b5563;
+    --color-border-dark: #6b7280;
+    --color-border-focus: #60a5fa;
+
+    /* Shadows - Lighter for dark mode */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.15);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    --shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.5);
+}
+
+/* Smooth theme transition */
+* {
+    transition: background-color var(--transition-base) ease,
+        color var(--transition-base) ease,
+        border-color var(--transition-base) ease;
+}
+
+/* Disable transitions on theme change for instant switch */
+[data-theme-transitioning] * {
+    transition: none !important;
+}

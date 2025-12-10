@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import LoadingSpinner from '../utils/LoadingSpinner';
+import SkeletonLoader from '../utils/SkeletonLoader';
 import './CropSelection.css';
 
 const CropSelection = () => {
@@ -100,16 +102,19 @@ const CropSelection = () => {
         {/* Location & Soil Section */}
         <div className="form-section">
           <h3 className="section-title">📍 Location & Soil Information</h3>
-          
+
           <div className="form-group">
-            <label>Location *</label>
+            <label htmlFor="location-input">Location *</label>
             <input
+              id="location-input"
               type="text"
               name="location"
               value={formData.location}
               onChange={handleInputChange}
               placeholder="e.g., Warangal, Telangana"
               required
+              aria-required="true"
+              aria-label="Enter your location"
             />
           </div>
 
@@ -132,7 +137,7 @@ const CropSelection = () => {
         {/* Land Details Section */}
         <div className="form-section">
           <h3 className="section-title">📏 Land Details</h3>
-          
+
           <div className="form-group">
             <label>Land Size (acres) *</label>
             <input
@@ -166,7 +171,7 @@ const CropSelection = () => {
         {/* Water Availability Section */}
         <div className="form-section">
           <h3 className="section-title">💧 Water Availability</h3>
-          
+
           <div className="radio-group">
             <label className="radio-label">
               <input
@@ -178,7 +183,7 @@ const CropSelection = () => {
               />
               <span>Sufficient</span>
             </label>
-            
+
             <label className="radio-label">
               <input
                 type="radio"
@@ -189,7 +194,7 @@ const CropSelection = () => {
               />
               <span>Limited</span>
             </label>
-            
+
             <label className="radio-label">
               <input
                 type="radio"
@@ -206,7 +211,7 @@ const CropSelection = () => {
         {/* Optional Information Section */}
         <div className="form-section">
           <h3 className="section-title">🌱 Additional Information (Optional)</h3>
-          
+
           <div className="form-group">
             <label>Previous Crop</label>
             <input
@@ -231,11 +236,17 @@ const CropSelection = () => {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="submit-button" disabled={loading}>
+        <button
+          type="submit"
+          className="submit-button"
+          disabled={loading}
+          aria-busy={loading}
+          aria-label={loading ? "Getting recommendations..." : "Get AI recommendations"}
+        >
           {loading ? (
             <>
-              <span className="spinner"></span>
-              Getting AI Recommendations...
+              <LoadingSpinner size="sm" color="white" label="Getting AI Recommendations..." />
+              <span style={{ marginLeft: '8px' }}>Getting AI Recommendations...</span>
             </>
           ) : (
             <>
@@ -259,8 +270,8 @@ const CropSelection = () => {
           <div className="recommendations-content">
             <pre>{recommendations}</pre>
           </div>
-          <button 
-            onClick={() => setRecommendations(null)} 
+          <button
+            onClick={() => setRecommendations(null)}
             className="reset-button"
           >
             Try Different Parameters

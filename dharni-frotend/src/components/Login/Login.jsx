@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import LoadingSpinner from "../utils/LoadingSpinner";
 import "./login.css";
 import { AuthContext } from "../context/AuthContext";
 
@@ -15,11 +16,11 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated){
+    if (isAuthenticated) {
       navigate("/", { replace: true });
 
     }
-    
+
   }, [isAuthenticated, navigate]);
 
   const handleLogin = async (e) => {
@@ -33,11 +34,11 @@ function Login() {
         "https://smartdharani-2.onrender.com/api/auth/login",
         { email, password },
         { withCredentials: true }
-       
+
       );
       // console.log(`this is data`);
 
-      
+
       const userId = data.userId;
       const username = data.username;
       login(data.token, userId, username);
@@ -57,21 +58,33 @@ function Login() {
         <p className="auth-subtitle">Log in to continue your journey</p>
 
         <form onSubmit={handleLogin} className="auth-form">
-          <input
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div className="form-group">
+            <label htmlFor="email-input" className="sr-only">Email address</label>
+            <input
+              id="email-input"
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              aria-required="true"
+              aria-label="Enter your email address"
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="form-group">
+            <label htmlFor="password-input" className="sr-only">Password</label>
+            <input
+              id="password-input"
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              aria-required="true"
+              aria-label="Enter your password"
+            />
+          </div>
 
           <div className="forgot-password-link">
             <span className="switch-link" onClick={() => navigate("/forgot-password")}>
@@ -83,8 +96,20 @@ function Login() {
           {errorMsg && <p className="error-msg">{errorMsg}</p>}
           {successMsg && <p className="success-msg">{successMsg}</p>}
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          <button
+            type="submit"
+            disabled={loading}
+            aria-busy={loading}
+            aria-label={loading ? "Logging in..." : "Login to your account"}
+          >
+            {loading ? (
+              <>
+                <LoadingSpinner size="sm" color="white" label="Logging in..." />
+                <span style={{ marginLeft: '8px' }}>Logging in...</span>
+              </>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
 

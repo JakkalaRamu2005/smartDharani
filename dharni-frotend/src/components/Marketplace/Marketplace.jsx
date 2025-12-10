@@ -1,13 +1,15 @@
-import React, { useState, useContext } from 'react'; // ✅ Add useContext
+import React, { useState, useContext } from 'react';
 import ListingForm from './ListingForm';
 import MarketplaceGrid from './MarketplaceGrid';
 import ContactModal from './contactModal';
-import { AuthContext } from '../context/AuthContext'; // ✅ Import AuthContext
+import { AuthContext } from '../context/AuthContext';
+import { SkeletonCard } from '../utils/SkeletonLoader';
+import LoadingSpinner from '../utils/LoadingSpinner';
 import './Marketplace.css';
 
 const Marketplace = () => {
   const { userId } = useContext(AuthContext); // ✅ Get userId from AuthContext
-  
+
   const [activeTab, setActiveTab] = useState('browse');
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCropType, setFilterCropType] = useState('All');
@@ -62,10 +64,10 @@ const Marketplace = () => {
       }
 
       console.log('📋 Fetching user listings for userId:', userId);
-      
+
       const response = await fetch(`https://smartdharani-2.onrender.com/api/marketplace/listings/user/${userId}`);
       const data = await response.json();
-      
+
       if (data.success) {
         setUserListings(data.data);
         console.log('✅ Fetched', data.data.length, 'user listings');
@@ -114,7 +116,7 @@ const Marketplace = () => {
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
         console.log('✅ Listing added successfully');
         setShowListingForm(false);
@@ -140,7 +142,7 @@ const Marketplace = () => {
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
         console.log('✅ Listing deleted');
         await fetchListings();
@@ -173,7 +175,7 @@ const Marketplace = () => {
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
         setShowContactModal(false);
         alert('✅ Inquiry sent! Seller will contact you within 2 hours.');
@@ -193,16 +195,22 @@ const Marketplace = () => {
         </p>
       </div>
 
-      <div className="tab-navigation">
+      <div className="tab-navigation" role="tablist" aria-label="Marketplace sections">
         <button
           className={`tab-button ${activeTab === 'browse' ? 'active' : ''}`}
           onClick={() => setActiveTab('browse')}
+          role="tab"
+          aria-selected={activeTab === 'browse'}
+          aria-controls="browse-panel"
         >
           📦 Browse Marketplace
         </button>
         <button
           className={`tab-button ${activeTab === 'myListings' ? 'active' : ''}`}
           onClick={() => setActiveTab('myListings')}
+          role="tab"
+          aria-selected={activeTab === 'myListings'}
+          aria-controls="myListings-panel"
         >
           📋 My Listings
         </button>
@@ -279,6 +287,27 @@ const Marketplace = () => {
             loading={loading}
             onContact={handleContactSeller}
           />
+
+          {/* Loading state with skeleton cards */}
+          {loading && (
+            <div className="marketplace-loading" aria-live="polite" aria-busy="true">
+              <div className="marketplace-grid">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <SkeletonCard key={index} />
+                ))}
+              </div>
+              <span className="sr-only">Loading marketplace listings...</span>
+            </div>
+          )}
+
+          {/* Empty state */}
+          {!loading && filteredListings.length === 0 && (
+            <div className="marketplace-empty" role="status">
+              <p className="empty-icon">📦</p>
+              <h3>No products found</h3>
+              <p>Try adjusting your filters or check back later for new listings.</p>
+            </div>
+          )}
         </div>
       )}
 
@@ -305,10 +334,10 @@ const Marketplace = () => {
             <div className="user-listings-grid">
               {userListings.map(listing => (
                 <div key={listing.id} className="user-listing-card">
-                  <img 
-                    src={listing.imageUrl || 'https://via.placeholder.com/300x200?text=No+Image'} 
-                    alt={listing.produceName} 
-                    className="listing-image" 
+                  <img
+                    src={listing.imageUrl || 'https://via.placeholder.com/300x200?text=No+Image'}
+                    alt={listing.produceName}
+                    className="listing-image"
                   />
                   <div className="listing-info">
                     <h3>{listing.produceName}</h3>
