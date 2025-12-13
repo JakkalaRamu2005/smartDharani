@@ -11,7 +11,7 @@ export const getProfile = async (req, res) => {
     console.log('📋 Fetching profile for userId:', userId); // Debug log
 
     const [rows] = await db.execute(
-      'SELECT * FROM user_profiles WHERE user_id = ?', 
+      'SELECT * FROM user_profiles WHERE user_id = ?',
       [userId]
     );
 
@@ -43,12 +43,17 @@ export const getProfile = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const userId = req.params.userId;
+
+    if (!userId || isNaN(userId)) {
+      return res.status(400).json({ message: 'Invalid User ID' });
+    }
+
     const { full_name, phone, location, bio, profile_image, preferred_language } = req.body;
 
     // console.log('📝 Updating profile for userId:', userId); // Debug log
 
     const [existing] = await db.execute(
-      'SELECT * FROM user_profiles WHERE user_id = ?', 
+      'SELECT * FROM user_profiles WHERE user_id = ?',
       [userId]
     );
 
@@ -64,7 +69,7 @@ export const updateProfile = async (req, res) => {
     } else {
       // Update existing profile
       // console.log('🔄 Updating existing profile');
-      
+
       // ✅ FIX: Corrected typo and added userId at the end
       await db.execute(
         `UPDATE user_profiles 
@@ -76,13 +81,17 @@ export const updateProfile = async (req, res) => {
     }
 
     // console.log('✅ Profile updated successfully');
-    res.json({ 
-      message: 'Profile updated successfully', 
-      success: true 
+    res.json({
+      message: 'Profile updated successfully',
+      success: true
     });
 
   } catch (error) {
     console.error('❌ Error updating profile:', error);
-    res.status(500).json({ message: 'Server error while updating profile' });
+    res.status(500).json({
+      message: 'Server error while updating profile',
+      error: error.message,
+      sqlMessage: error.sqlMessage
+    });
   }
 };
