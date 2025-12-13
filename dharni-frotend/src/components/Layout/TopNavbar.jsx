@@ -85,15 +85,7 @@ const TopNavbar = () => {
       <div className="navbar-links desktop-nav">
         <ThemeToggle />
 
-        <Link to="/contact" className="navbar-link" aria-label="Contact us">
-          <span className="navbar-icon" aria-hidden="true">📞</span>
-          <span className="navbar-text">Contact</span>
-        </Link>
 
-        <Link to="/about" className="navbar-link" aria-label="About us">
-          <span className="navbar-icon" aria-hidden="true">ℹ️</span>
-          <span className="navbar-text">About</span>
-        </Link>
 
         <div className="profile-dropdown-container" ref={dropdownRef}>
           <button
@@ -170,23 +162,11 @@ const TopNavbar = () => {
         </div>
 
         <div className="mobile-nav-links">
-          <Link
-            to="/contact"
-            className="mobile-nav-link"
-            onClick={closeMobileMenu}
-          >
-            <span className="navbar-icon" aria-hidden="true">📞</span>
-            Contact
-          </Link>
+          {/* Theme Toggle for Mobile */}
+          <div className="mobile-theme-toggle">
+            <ThemeToggle />
+          </div>
 
-          <Link
-            to="/about"
-            className="mobile-nav-link"
-            onClick={closeMobileMenu}
-          >
-            <span className="navbar-icon" aria-hidden="true">ℹ️</span>
-            About
-          </Link>
 
           <div className="mobile-nav-divider"></div>
 

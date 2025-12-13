@@ -3,8 +3,8 @@ import Cookies from 'js-cookie';
 
 
 const axiosInstance = axios.create({
-    baseURL: 'https://smartdharani-2.onrender.com/api',
-    withCredentials: true,
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:9291/api',
+  withCredentials: true,
 })
 
 // Request interceptor
@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
       Cookies.remove('token');
       Cookies.remove('userId');
       Cookies.remove('username');
-      
+
       window.location.href = '/login';
     }
     return Promise.reject(error);

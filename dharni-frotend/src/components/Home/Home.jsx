@@ -4,6 +4,8 @@ import Hero from './Hero';
 import FeatureCards from './FeatureCards';
 import CallToAction from './CallToAction';
 import "./styles/home.css"
+import About from '../About/About';
+import Contact from '../Contact/Contact';
 
 const Home = () => {
   return (
@@ -13,6 +15,8 @@ const Home = () => {
         <Hero />
         <FeatureCards />
         <CallToAction />
+        <About />
+        <Contact />
       </div>
     </div>
   );

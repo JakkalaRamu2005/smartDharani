@@ -60,7 +60,8 @@ const EditProfile = () => {
       if (err.response?.status === 401) {
         navigate('/login', { replace: true });
       } else {
-        setMessage('❌ Failed to update profile');
+        const errorMessage = err.response?.data?.sqlMessage || err.response?.data?.error || err.response?.data?.message || 'Failed to update profile';
+        setMessage(`❌ ${errorMessage}`);
       }
     } finally {
       setLoading(false);
@@ -70,7 +71,7 @@ const EditProfile = () => {
   return (
     <div className="edit-profile-container">
       <h1>Edit Profile</h1>
-      
+
       <form onSubmit={handleSubmit} className="edit-profile-form">
         <div className="form-group">
           <label>Full Name</label>
