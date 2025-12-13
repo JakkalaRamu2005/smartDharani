@@ -68,6 +68,12 @@ const TopNavbar = () => {
 
   return (
     <div className="top-navbar">
+      {/* Mobile Branding */}
+      <div className="mobile-brand">
+        <span className="brand-icon">🌾</span>
+        <span className="brand-text">Smart Dharani</span>
+      </div>
+
       {/* Hamburger Menu Button - Mobile Only */}
       <button
         className="hamburger-button"
@@ -87,51 +93,7 @@ const TopNavbar = () => {
 
 
 
-        <div className="profile-dropdown-container" ref={dropdownRef}>
-          <button
-            className="navbar-link profile-button"
-            onClick={() => setShowDropdown(!showDropdown)}
-            aria-label="Profile menu"
-            aria-expanded={showDropdown}
-            aria-haspopup="true"
-          >
-            <span className="navbar-icon" aria-hidden="true">👤</span>
-            <span className="navbar-text">Profile</span>
-          </button>
 
-          {showDropdown && (
-            <div className="profile-dropdown" role="menu" aria-label="Profile options">
-              <Link
-                to="/profile"
-                className="dropdown-item"
-                onClick={() => setShowDropdown(false)}
-                role="menuitem"
-              >
-                <span className="dropdown-icon" aria-hidden="true">👁️</span>
-                View Profile
-              </Link>
-
-              <Link
-                to="/edit-profile"
-                className="dropdown-item"
-                onClick={() => setShowDropdown(false)}
-                role="menuitem"
-              >
-                <span className="dropdown-icon" aria-hidden="true">✏️</span>
-                Edit Profile
-              </Link>
-
-              <button
-                className="dropdown-item logout-btn"
-                onClick={handleLogout}
-                role="menuitem"
-              >
-                <span className="dropdown-icon" aria-hidden="true">🚪</span>
-                Logout
-              </button>
-            </div>
-          )}
-        </div>
       </div>
 
       {/* Mobile Menu Overlay */}
@@ -170,22 +132,30 @@ const TopNavbar = () => {
 
           <div className="mobile-nav-divider"></div>
 
-          <Link
-            to="/profile"
-            className="mobile-nav-link"
-            onClick={closeMobileMenu}
-          >
-            <span className="navbar-icon" aria-hidden="true">👁️</span>
-            View Profile
+          <Link to="/" className="mobile-nav-link" onClick={closeMobileMenu}>
+            <span className="navbar-icon">🏠</span> Home
           </Link>
 
-          <Link
-            to="/edit-profile"
-            className="mobile-nav-link"
-            onClick={closeMobileMenu}
-          >
-            <span className="navbar-icon" aria-hidden="true">✏️</span>
-            Edit Profile
+          <Link to="/crop-selection" className="mobile-nav-link" onClick={closeMobileMenu}>
+            <span className="navbar-icon">🌱</span> Crop Selection
+          </Link>
+
+          <Link to="/farming-guides" className="mobile-nav-link" onClick={closeMobileMenu}>
+            <span className="navbar-icon">📖</span> Farming Guides
+          </Link>
+
+          <Link to="/issue-diagnosis" className="mobile-nav-link" onClick={closeMobileMenu}>
+            <span className="navbar-icon">🔍</span> Issue Diagnosis
+          </Link>
+
+          <Link to="/marketplace" className="mobile-nav-link" onClick={closeMobileMenu}>
+            <span className="navbar-icon">�</span> Marketplace
+          </Link>
+
+          <div className="mobile-nav-divider"></div>
+
+          <Link to="/profile" className="mobile-nav-link" onClick={closeMobileMenu}>
+            <span className="navbar-icon">👤</span> Profile
           </Link>
 
           <button

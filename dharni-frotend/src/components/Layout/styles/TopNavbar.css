@@ -87,6 +87,23 @@
   width: calc(100% - 200px);
 }
 
+/* Mobile Branding */
+.mobile-brand {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  font-size: 24px;
+}
+
+.brand-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
 /* Hamburger Button - Hidden on Desktop */
 .hamburger-button {
   display: none;
@@ -298,6 +315,10 @@
     width: 100%;
     padding: 0 var(--spacing-2);
     height: 60px;
+  }
+
+  .mobile-brand {
+    display: flex;
   }
 
   /* Show hamburger button on mobile */

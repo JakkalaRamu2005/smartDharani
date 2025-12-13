@@ -81,30 +81,6 @@
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%;
-    height: 60px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .sidebar-nav {
-    flex-direction: row;
-    padding: 0 10px;
-    overflow-x: auto;
-  }
-  
-  .nav-item {
-    flex-direction: column;
-    gap: 4px;
-    padding: 8px 12px;
-  }
-  
-  .nav-text {
-    font-size: 10px;
-  }
-  
-  .sidebar-footer {
     display: none;
   }
 }
