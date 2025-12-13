@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { useNavigate, useParams } from "react-router-dom";
 // import "./resetPassword.css";
 
@@ -12,7 +12,7 @@ function ResetPassword() {
   const [validating, setValidating] = useState(true);
   const [isValidToken, setIsValidToken] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  
+
   const navigate = useNavigate();
   const { token } = useParams();
 
@@ -23,8 +23,8 @@ function ResetPassword() {
 
   const verifyToken = async () => {
     try {
-      const { data } = await axios.get(
-        `https://smartdharani-2.onrender.com/api/auth/verify-token/${token}`
+      const { data } = await axiosInstance.get(
+        `/auth/verify-token/${token}`
       );
 
       if (data.valid) {
@@ -58,13 +58,13 @@ function ResetPassword() {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(
-        `https://smartdharani-2.onrender.com/api/auth/reset-password/${token}`,
+      const { data } = await axiosInstance.post(
+        `/auth/reset-password/${token}`,
         { newPassword, confirmPassword }
       );
 
       setMessage(data.message);
-      
+
       // Redirect to login after 2 seconds
       setTimeout(() => {
         navigate("/login", { replace: true });

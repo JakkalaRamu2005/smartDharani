@@ -1,14 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import "./styles/sidebar.css"
 
 const Sidebar = () => {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <div className="sidebar">
-      <div className="sidebar-header">
+      <Link to="/" className="sidebar-header">
         <span className="logo-icon">🌾</span>
         <h2 className="logo-text">Smart Dharani</h2>
-      </div>
+      </Link>
 
       <nav className="sidebar-nav">
         <Link to="/" className="nav-item active">
@@ -42,8 +51,14 @@ const Sidebar = () => {
         </Link>
       </nav>
 
-      <div className="sidebar-footer">
-        <p className="footer-text">© 2025 Smart Dharani</p>
+      <div className="sidebar-bottom">
+        <button className="nav-item logout-button" onClick={handleLogout}>
+          <span className="nav-icon">🚪</span>
+          <span className="nav-text">Logout</span>
+        </button>
+        <div className="sidebar-footer">
+          <p className="footer-text">© 2025 Smart Dharani</p>
+        </div>
       </div>
     </div >
   );

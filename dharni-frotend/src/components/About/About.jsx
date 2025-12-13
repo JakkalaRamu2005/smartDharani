@@ -1,4 +1,5 @@
 import React from 'react';
+import { Target, Eye, Sprout, Users, HeartHandshake, Leaf } from 'lucide-react';
 import './About.css';
 
 const About = () => {
@@ -9,47 +10,77 @@ const About = () => {
   return (
     <div className="about-page">
       <div className="about-header">
-        <h1 className="about-title">About Smart Dharani</h1>
-        
+        <div className="about-subtitle">
+          <Sprout size={20} className="subtitle-icon" />
+          <span>Our Story</span>
+        </div>
+        <h1 className="about-title">Revolutionizing Agriculture with Technology</h1>
+
         <p className="about-intro">
-          Smart Dharani is a revolutionary agricultural platform that empowers farmers with cutting-edge technology and market access. Our mission is to transform traditional farming practices through innovative solutions and sustainable approaches.
+          Smart Dharani is bridging the gap between traditional farming and modern technology.
+          We empower farmers with data-driven insights, market access, and sustainable solutions
+          to ensure improved yields and better livelihoods.
         </p>
       </div>
-      
+
       <div className="vision-mission-container">
-        <div className="info-card">
-          <h2 className="card-title">Our Vision</h2>
-          <p className="card-text">
-            To create a sustainable and technologically advanced agricultural ecosystem that benefits farmers, consumers, and the environment.
-          </p>
+        <div className="info-card vision-card">
+          <div className="card-icon-wrapper">
+            <Eye className="card-icon" size={28} />
+          </div>
+          <div className="card-content">
+            <h2 className="card-title">Our Vision</h2>
+            <p className="card-text">
+              To create a sustainable, technologically advanced agricultural ecosystem where every farmer has access to global markets and smart tools for precision farming.
+            </p>
+          </div>
         </div>
-        
-        <div className="info-card">
-          <h2 className="card-title">Our Mission</h2>
-          <p className="card-text">
-            Empowering farmers with smart solutions while promoting sustainable farming practices and ensuring food security for future generations.
-          </p>
+
+        <div className="info-card mission-card">
+          <div className="card-icon-wrapper">
+            <Target className="card-icon" size={28} />
+          </div>
+          <div className="card-content">
+            <h2 className="card-title">Our Mission</h2>
+            <p className="card-text">
+              Empowering the agrarian community with AI-driven crop diagnosis, real-time market insights, and expert guidance to foster food security and economic growth.
+            </p>
+          </div>
         </div>
       </div>
-      
+
       <div className="impact-section">
-        <h2 className="section-title">Our Impact</h2>
-        
-        <p className="section-text">
-          Smart Dharani is a collaborative effort built by passionate individuals aiming to revolutionize agriculture in Telangana and beyond. It merges AI-powered insights with ground-level needs, ensuring that both traditional and modern farming practices co-exist and thrive.
-        </p>
+        <div className="impact-content">
+          <h2 className="section-title">Our Impact</h2>
+          <p className="section-text">
+            Built by passionate individuals committed to rural development, Smart Dharani merges AI-powered intelligence with ground-level realities. We celebrate the coexistence of wisdom and innovation.
+          </p>
+
+
+        </div>
+        <div className="impact-visual">
+          {/* Abstract visual element */}
+          <Leaf className="impact-icon" size={120} strokeWidth={0.5} />
+        </div>
       </div>
-      
+
       <div className="community-section">
-        <h2 className="section-title">Join Our Community</h2>
-        
-        <p className="section-text">
-          Be part of a growing community of farmers, agricultural experts, and enthusiasts. Share knowledge, get support, and grow together.
-        </p>
-        
-        <button onClick={handleJoinWhatsApp} className="join-button">
-          Join Smart Dharani Today
-        </button>
+        <div className="community-content">
+          <div className="community-icon-wrapper">
+            <Users size={32} />
+          </div>
+          <h2 className="section-title">Join Our Community</h2>
+
+          <p className="section-text">
+            Connect with a growing network of farmers, agricultural experts, and enthusiasts.
+            Share knowledge, resolve queries, and grow together in a supportive environment.
+          </p>
+
+          <button onClick={handleJoinWhatsApp} className="join-button">
+            <HeartHandshake size={20} style={{ marginRight: '8px' }} />
+            Join Smart Dharani Today
+          </button>
+        </div>
       </div>
     </div>
   );

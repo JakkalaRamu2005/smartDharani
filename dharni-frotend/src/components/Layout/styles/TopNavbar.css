@@ -92,6 +92,8 @@
   display: none;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .brand-icon {
@@ -141,6 +143,7 @@
 /* Desktop Navigation */
 .desktop-nav {
   display: flex;
+  margin-left: auto;
 }
 
 .navbar-links {
@@ -165,6 +168,7 @@
 .navbar-link:hover {
   color: var(--color-primary-700);
   background-color: var(--color-primary-50);
+  text-decoration: none;
 }
 
 .navbar-icon {

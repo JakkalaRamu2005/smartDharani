@@ -21,9 +21,6 @@ const ThemeToggle = () => {
             <span className="theme-toggle-icon" aria-hidden="true">
                 {isDark ? '☀️' : '🌙'}
             </span>
-            <span className="theme-toggle-text">
-                {isDark ? 'Light' : 'Dark'}
-            </span>
         </button>
     );
 };

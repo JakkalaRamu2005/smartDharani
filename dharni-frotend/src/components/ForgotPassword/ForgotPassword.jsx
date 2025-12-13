@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 // import "./forgotPassword.css";
 
@@ -17,8 +17,8 @@ function ForgotPassword() {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(
-        "https://smartdharani-2.onrender.com/api/auth/forgot-password",
+      const { data } = await axiosInstance.post(
+        "/auth/forgot-password",
         { email }
       );
 

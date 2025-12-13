@@ -69,10 +69,10 @@ const TopNavbar = () => {
   return (
     <div className="top-navbar">
       {/* Mobile Branding */}
-      <div className="mobile-brand">
+      <Link to="/" className="mobile-brand">
         <span className="brand-icon">🌾</span>
         <span className="brand-text">Smart Dharani</span>
-      </div>
+      </Link>
 
       {/* Hamburger Menu Button - Mobile Only */}
       <button
