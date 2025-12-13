@@ -7,6 +7,23 @@ dotenv.config();
 export const getProfile = async (req, res) => {
   try {
     const userId = req.params.userId;
+    const requesterId = req.userId;
+
+    console.log(`🔐 Authorization Check:`);
+    console.log(`   - Requester ID from Token: ${requesterId} (Type: ${typeof requesterId})`);
+    console.log(`   - Target Profile ID: ${userId} (Type: ${typeof userId})`);
+
+    // Cast both to strings for safe comparison
+    if (String(requesterId) !== String(userId)) {
+      console.warn(`⛔ Access Denied: Mismatch detected!`);
+      return res.status(403).json({
+        message: 'Forbidden: You can only access your own profile',
+        debug: {
+          requester: String(requesterId),
+          target: String(userId)
+        }
+      });
+    }
 
     console.log('📋 Fetching profile for userId:', userId); // Debug log
 

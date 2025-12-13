@@ -16,7 +16,7 @@ export const authenticateToken = (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
-        req.userId = decoded.userId;
+        req.userId = decoded.userId || decoded.id; // Check both possible field names
         next();
 
     } catch (error) {

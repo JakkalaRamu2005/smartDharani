@@ -34,20 +34,16 @@ const FeatureCards = () => {
     <div className="feature-cards-container">
       {features.map((feature) => (
         <div key={feature.id} className="feature-card">
-          <div 
+          <div
             className="card-image"
             style={{ backgroundImage: `url(${feature.bgImage})` }}
-          >
-            
-          </div>
+          />
           <div className="card-content">
-            <h3 className="card-title">
-              <span className="icon-inline">{feature.icon}</span>
-              {feature.title}
-            </h3>
+            <div className="card-icon">{feature.icon}</div>
+            <h3 className="card-title">{feature.title}</h3>
             <p className="card-description">{feature.description}</p>
             <a href={feature.link} className="card-link">
-              Learn more →
+              Explore Now <span style={{ fontSize: '1.2em' }}>→</span>
             </a>
           </div>
         </div>

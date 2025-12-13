@@ -27,9 +27,12 @@
 
 .profile-card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 1rem;
 }
 
@@ -38,30 +41,45 @@
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
-  margin: 0 auto 2rem;
-  border: 4px solid #48bb78;
+  margin-bottom: 1.5rem;
+  border: 3px solid #f0f0f0;
+}
+
+.profile-image-placeholder {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
 }
 
 .profile-details {
+  width: 100%;
   display: grid;
   gap: 1.5rem;
 }
 
 .profile-field {
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 0.5rem;
 }
 
 .profile-field:last-child {
   border-bottom: none;
+  margin-bottom: 0;
 }
 
 .profile-field label {
   display: block;
   font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 0.5rem;
+  color: #666;
+  margin-bottom: 0.25rem;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -78,6 +96,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
